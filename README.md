@@ -29,6 +29,22 @@ tu **compañero**, calculado con todo tu perfil, y un Pokémon por cada uno de t
 |---|---|
 | <img src="docs/capturas/1-sobre.jpg" alt="Sobre cerrado de la primera edición" width="420"> | <img src="docs/capturas/3-coleccion.jpg" alt="Colección de 6 cartas" width="420"> |
 
+## Tu carta en el README
+
+Pega esto en el README de tu perfil (cambia `TU_USUARIO`). La carta se actualiza sola una vez al día y lleva a tu sobre:
+
+```md
+[![Mi Gitmon](https://gitmon-snowy.vercel.app/api/card?user=TU_USUARIO)](https://gitmon-snowy.vercel.app/u/TU_USUARIO)
+```
+
+<a href="https://gitmon-snowy.vercel.app/u/FelipeBeltranING"><img src="https://gitmon-snowy.vercel.app/api/card?user=FelipeBeltranING" alt="El compañero de FelipeBeltranING en Gitmon" width="260"></a>
+
+En la app, el botón **Tarjeta para tu README** copia el Markdown con tu usuario.
+
+## Compartir
+
+Cuando compartes `https://gitmon-snowy.vercel.app/u/<usuario>` en WhatsApp, X o Discord, la vista previa muestra el compañero de ese entrenador con su carta (`/api/og`, PNG de 1200×630).
+
 ## Cómo se elige cada carta
 
 - **Tipo**: tu lenguaje principal (por tamaño y estrellas, sin forks). Java → Fuego, Python → Veneno, JavaScript → Eléctrico, TypeScript → Psíquico… El segundo tipo sale de tu segundo lenguaje, o es **Siniestro** si programas de noche (22:00–05:00) en al menos 3 días distintos.
@@ -54,7 +70,7 @@ Prueba otra semilla con `?t=4` y abre directamente un sobre con `/u/<usuario>`.
 
 | Variable | Para qué |
 |---|---|
-| `GITHUB_TOKEN` | Opcional. Token de solo lectura para la función `/api/github`, que junta perfil, repos, eventos y amigos en una respuesta con caché de 24 h. Sin token, el navegador consulta GitHub directamente (60 consultas/hora por IP). |
+| `GITHUB_TOKEN` | Opcional. Token de solo lectura para las funciones (`/api/github`, `/api/card`, `/api/og`). Junta perfil, repos, eventos y amigos con caché de 24 h. Sin token, el navegador consulta GitHub directamente (60 consultas/hora por IP). |
 
 ## Despliegue en Vercel
 
@@ -69,7 +85,11 @@ Para montar tu propia copia:
 ## Estructura
 
 ```
-api/github.ts        función serverless: GitHub con token y caché de 24 h
+api/github.ts        GitHub con token y caché de 24 h
+api/card.ts          tu compañero como carta SVG para el README
+api/og.ts            imagen para redes (PNG 1200×630)
+api/u.ts             /u/<usuario> con título e imagen de ese entrenador
+src/share/           dibujo de la carta y de la imagen para redes
 src/core/            algoritmo puro y probado: tipos, stats, rareza, elección, sobre
 src/data/            clientes de GitHub y PokeAPI con caché en memoria
 src/ui/              carta, sobre, colección e intercambio
