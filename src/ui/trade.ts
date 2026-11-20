@@ -1,3 +1,4 @@
+import { FRIENDS_VISIBLE } from '../config';
 import { tradeProposal, type Friend, type Pack } from '../core/pack';
 import { RARITY } from '../core/rarity';
 import { bindTilt, captionHTML, cardHTML } from './card';
@@ -14,22 +15,26 @@ export function createTrade(opts: TradeOptions): { show(pack: Pack): void } {
   const input = $<HTMLInputElement>('#friend');
   const out = $('#tres');
 
-  function drawFriends(list: Friend[]): void {
+  function drawFriends(list: Friend[], all = false): void {
     if (!list.length) {
       box.innerHTML = '<span>Escribe el usuario de un amigo:</span>';
       return;
     }
+    const shown = all ? list : list.slice(0, FRIENDS_VISIBLE);
+    const more = !all && list.length > FRIENDS_VISIBLE ? `<button type="button" class="more-f">+${list.length - FRIENDS_VISIBLE} más</button>` : '';
     box.innerHTML =
       '<span>Tus amigos en GitHub:</span>' +
-      list
+      shown
         .map((u) => `<button type="button" data-u="${esc(u.login)}"><img src="${esc(u.avatar_url)}&s=60" alt="" loading="lazy">@${esc(u.login)}</button>`)
-        .join('');
+        .join('') +
+      more;
     $$<HTMLButtonElement>('button[data-u]', box).forEach((b) =>
       b.addEventListener('click', () => {
         input.value = b.dataset.u ?? '';
         form.requestSubmit();
       }),
     );
+    box.querySelector('.more-f')?.addEventListener('click', () => drawFriends(list, true));
   }
 
   form.addEventListener('submit', async (e) => {
