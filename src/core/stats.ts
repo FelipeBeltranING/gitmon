@@ -47,6 +47,29 @@ export function stat(x: number, max: number): number {
 
 export const total = (v: readonly number[]): number => v.reduce((a, b) => a + b, 0);
 
+/** Días distintos con actividad nocturna necesarios para ser «búho nocturno». */
+export const MIN_NIGHT_DAYS = 3;
+
+const isNightHour = (h: number): boolean => h >= 22 || h < 5;
+
+/**
+ * Hora pico contando días distintos por hora, no eventos: una ráfaga de 90 commits
+ * a medianoche pesa lo mismo que un solo commit esa noche.
+ */
+export function rhythm(events: GhEvent[], random: () => number): { peakHour: number; nightDays: number } {
+  if (!events.length) return { peakHour: Math.floor(random() * 24), nightDays: 0 };
+  const daysPerHour = Array.from({ length: 24 }, () => new Set<string>());
+  const nights = new Set<string>();
+  for (const e of events) {
+    const d = new Date(e.created_at);
+    const day = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+    daysPerHour[d.getHours()].add(day);
+    if (isNightHour(d.getHours())) nights.add(day);
+  }
+  const counts = daysPerHour.map((s) => s.size);
+  return { peakHour: counts.indexOf(Math.max(...counts)), nightDays: nights.size };
+}
+
 export interface ProfileSignals {
   languages: string[];
   primary: TypeName;
@@ -79,10 +102,8 @@ export function profileSignals(
     .map(([lang]) => lang);
   const primary = typeOfLanguage(languages[0]);
 
-  const hours = new Array<number>(24).fill(0);
-  for (const e of events) hours[new Date(e.created_at).getHours()]++;
-  const peakHour = events.length ? hours.indexOf(Math.max(...hours)) : Math.floor(random() * 24);
-  const night = peakHour >= 22 || peakHour < 5;
+  const { peakHour, nightDays } = rhythm(events, random);
+  const night = (peakHour >= 22 || peakHour < 5) && nightDays >= MIN_NIGHT_DAYS;
   let secondary: TypeName | null = night ? 'dark' : languages[1] ? typeOfLanguage(languages[1]) : null;
   if (secondary === primary) secondary = null;
 
