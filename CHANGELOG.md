@@ -2,6 +2,18 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/); versiones con [SemVer](https://semver.org/lang/es/).
 
+## [0.2.1] · 2026-11-20 · Pulido del lanzamiento
+
+### Cambiado
+- La interfaz dice «Primera edición» en vez de «Temporada 5». La semilla interna no cambia: nadie pierde su sobre (#40).
+- `?t=<n>` se presenta como «Prueba · semilla n».
+
+### Añadido
+- URL de producción en el README y `og:url` (#41).
+
+### Mantenimiento
+- `actions/checkout` y `actions/setup-node` a la v7 (dependabot).
+
 ## [0.2.0] · 2026-11-20 · Sobre jugable
 
 ### Añadido
@@ -25,5 +37,6 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/); v
 - Bocetos v0 (hierba alta nocturna) y v1 (Pokédex, Combate, Carta holo, híbrido y sobre).
 - ADR 0001: dirección visual de carta coleccionable.
 
+[0.2.1]: https://github.com/FelipeBeltranING/gitmon/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/FelipeBeltranING/gitmon/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/FelipeBeltranING/gitmon/releases/tag/v0.1.0

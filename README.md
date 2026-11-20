@@ -7,6 +7,8 @@
 Escribe tu usuario de GitHub y abre un sobre de 6 cartas Pokémon:
 tu **compañero**, calculado con todo tu perfil, y un Pokémon por cada uno de tus **5 repos más activos**.
 
+### 🎴 [Abre tu sobre en gitmon-snowy.vercel.app](https://gitmon-snowy.vercel.app)
+
 ![Primera edición](https://img.shields.io/badge/edici%C3%B3n-primera-7B4FC9?style=flat-square)
 [![CI](https://github.com/FelipeBeltranING/gitmon/actions/workflows/ci.yml/badge.svg)](https://github.com/FelipeBeltranING/gitmon/actions/workflows/ci.yml)
 ![PokeAPI](https://img.shields.io/badge/datos-PokeAPI-EF5350?style=flat-square)
@@ -55,6 +57,10 @@ Prueba otra semilla con `?t=4` y abre directamente un sobre con `/u/<usuario>`.
 | `GITHUB_TOKEN` | Opcional. Token de solo lectura para la función `/api/github`, que junta perfil, repos, eventos y amigos en una respuesta con caché de 24 h. Sin token, el navegador consulta GitHub directamente (60 consultas/hora por IP). |
 
 ## Despliegue en Vercel
+
+Producción: **https://gitmon-snowy.vercel.app**. Con la integración de GitHub, cada push a `main` se despliega solo y cada PR recibe su propia URL de vista previa.
+
+Para montar tu propia copia:
 
 1. Importa el repo en Vercel (detecta Vite solo).
 2. Añade `GITHUB_TOKEN` en *Settings → Environment Variables*.
