@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Gitmon — landing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>x-dc{display:none}</style>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&amp;family=Silkscreen&amp;family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap">
+<style>
+body{margin:0;background:#0B1210;color:#E8F0EA;font-family:'Space Grotesk',system-ui,sans-serif}
+*{box-sizing:border-box}
+a{color:#FFD23F}a:hover{color:#FFE58A}
+.cell{border-radius:2px;aspect-ratio:1/1;transition:background .35s ease}
+.scan .cell{animation:rustle 1.1s ease-in-out infinite}
+@keyframes rustle{0%,100%{transform:translateY(0) scale(1);filter:brightness(1)}30%{transform:translateY(-3px) scale(1.15);filter:brightness(1.7)}60%{transform:translateY(1px) scale(.92)}}
+.sweep{animation:sweep 1.3s linear infinite}
+@keyframes sweep{0%{left:0%}100%{left:100%}}
+.bubble{animation:pop .55s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes pop{0%{transform:translate(-50%,-115%) scale(0)}100%{transform:translate(-50%,-115%) scale(1)}}
+.reveal{animation:rise .6s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.blink{animation:blink 1s steps(2,start) infinite}
+@keyframes blink{50%{opacity:0}}
+.dither{background-image:radial-gradient(rgba(232,240,234,.14) 1px,transparent 1.3px);background-size:7px 7px}
+.btn{transition:transform .12s ease,box-shadow .12s ease;cursor:pointer}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 #45A85B !important}
+.btn:active{transform:translate(2px,2px);box-shadow:0 0 0 #45A85B !important}
+.btn:disabled{opacity:.7;cursor:progress}
+.chip{cursor:pointer;transition:background .15s ease}
+.field:focus-within{border-color:#FFD23F !important}
+.field input{outline:none}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #FFD23F;outline-offset:3px}
+.nav a{color:#C9D8CF;text-decoration:none}.nav a:hover{color:#FFD23F}
+@media (prefers-reduced-motion: reduce){.scan .cell,.sweep,.blink,.reveal,.bubble{animation:none}}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #0B1210; color: #E8F0EA; font-family: 'Space Grotesk', system-ui, sans-serif">
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px)">
+
+<header style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 22px 0; border-bottom: 2px solid #1C2B23">
+<a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #E8F0EA">
+<svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+<rect x="0" y="0" width="6" height="6" rx="1" fill="#45A85B"></rect><rect x="28" y="0" width="6" height="6" rx="1" fill="#45A85B"></rect>
+<rect x="0" y="7" width="6" height="6" rx="1" fill="#2E7D46"></rect><rect x="7" y="7" width="6" height="6" rx="1" fill="#6FDB7A"></rect><rect x="14" y="7" width="6" height="6" rx="1" fill="#6FDB7A"></rect><rect x="21" y="7" width="6" height="6" rx="1" fill="#6FDB7A"></rect><rect x="28" y="7" width="6" height="6" rx="1" fill="#2E7D46"></rect>
+<rect x="0" y="14" width="6" height="6" rx="1" fill="#45A85B"></rect><rect x="7" y="14" width="6" height="6" rx="1" fill="#FFD23F"></rect><rect x="14" y="14" width="6" height="6" rx="1" fill="#45A85B"></rect><rect x="21" y="14" width="6" height="6" rx="1" fill="#FFD23F"></rect><rect x="28" y="14" width="6" height="6" rx="1" fill="#45A85B"></rect>
+<rect x="0" y="21" width="6" height="6" rx="1" fill="#2E7D46"></rect><rect x="7" y="21" width="6" height="6" rx="1" fill="#45A85B"></rect><rect x="14" y="21" width="6" height="6" rx="1" fill="#6FDB7A"></rect><rect x="21" y="21" width="6" height="6" rx="1" fill="#45A85B"></rect><rect x="28" y="21" width="6" height="6" rx="1" fill="#2E7D46"></rect>
+<rect x="7" y="28" width="6" height="6" rx="1" fill="#1F5133"></rect><rect x="14" y="28" width="6" height="6" rx="1" fill="#2E7D46"></rect><rect x="21" y="28" width="6" height="6" rx="1" fill="#1F5133"></rect>
+</svg>
+<span style="font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.06em">GITMON</span>
+</a>
+<nav class="nav" aria-label="Principal" style="display: flex; gap: 28px; flex-wrap: wrap; font-size: 15px; font-weight: 500">
+<a href="#como">Cómo funciona</a>
+<a href="#tipos">Tipos del código</a>
+<a href="#readme">Tarjeta README</a>
+</nav>
+</header>
+
+<section id="top" style="display: flex; flex-wrap: wrap; gap: 56px; align-items: center; padding: 64px 0 56px">
+<div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 26px">
+<p style="margin: 0; font-family: Silkscreen, monospace; font-size: 13px; letter-spacing: 0.08em; color: #6FDB7A">&gt; TEMPORADA 1 · REGIÓN OPEN SOURCE</p>
+<h1 style="margin: 0; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: clamp(40px, 5.6vw, 68px); line-height: 1.02; letter-spacing: -0.01em">¿Qué Pokémon se esconde en tus <span style="color: #6FDB7A">commits</span>?</h1>
+<p style="margin: 0; font-size: 19px; line-height: 1.55; color: #A9BDB1; max-width: 540px">Escribe tu usuario de GitHub. Leemos tus lenguajes, tus horas de código y tu racha, y encontramos al Pokémon que programa como tú. O arma un equipo de seis con tus repos.</p>
+<form onSubmit="{{onSubmit}}" style="display: flex; flex-direction: column; gap: 14px">
+<label for="gh-user" style="font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.06em; color: #A9BDB1">USUARIO DE GITHUB</label>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<div class="field" style="flex: 1 1 280px; min-width: 0; display: flex; align-items: center; background: #111C17; border: 2px solid #2A4034; border-radius: 12px; padding: 0 16px; min-height: 58px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #7F978A">github.com/</span>
+<input id="gh-user" value="{{user}}" onChange="{{onUser}}" autocomplete="off" spellcheck="false" placeholder="tu-usuario" style="flex: 1; min-width: 0; background: transparent; border: 0; color: #E8F0EA; font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 17px; padding: 16px 4px">
+</div>
+<button type="submit" class="btn" disabled="{{isScan}}" style="min-height: 58px; padding: 0 26px; background: #FFD23F; color: #0B1210; border: 0; border-radius: 12px; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 19px; box-shadow: 4px 4px 0 #45A85B">{{ctaLabel}}</button>
+</div>
+<div role="group" aria-label="Modo de resultado" style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center">
+<button type="button" class="chip" aria-pressed="{{soloPressed}}" onClick="{{setSolo}}" style="min-height: 44px; padding: 0 18px; border-radius: 999px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; {{soloStyle}}">1 compañero</button>
+<button type="button" class="chip" aria-pressed="{{teamPressed}}" onClick="{{setTeam}}" style="min-height: 44px; padding: 0 18px; border-radius: 999px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; {{teamStyle}}">Equipo de 6</button>
+<span style="font-size: 14px; color: #7F978A; margin-left: 6px">Solo datos públicos · sin login</span>
+</div>
+</form>
+</div>
+
+<div style="flex: 1 1 520px; min-width: 0">
+<div style="position: relative; background: #111C17; border: 2px solid #22362B; border-radius: 18px; padding: 22px 22px 20px; box-shadow: 10px 10px 0 #0E1813">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.06em">
+<span style="color: #A9BDB1">HIERBA ALTA · @{{userShown}}</span>
+<span style="display: flex; align-items: center; gap: 8px; color: #FFD23F"><span class="blink" style="width: 8px; height: 8px; background: #FFD23F; display: inline-block"></span>{{statusText}}</span>
+</div>
+<div class="{{gridClass}}" style="position: relative; display: grid; grid-template-rows: repeat(7, minmax(0, 1fr)); grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px; margin-top: 18px">
+<sc-for list="{{cells}}" as="c" hint-placeholder-count="210"><div class="cell" style="{{c.style}}"></div></sc-for>
+<sc-if value="{{isScan}}" hint-placeholder-val="{{false}}"><div class="sweep" aria-hidden="true" style="position: absolute; top: -8px; bottom: -8px; width: 3px; background: #FFD23F; box-shadow: 0 0 20px 5px rgba(255, 210, 63, 0.5)"></div></sc-if>
+<sc-if value="{{isResult}}" hint-placeholder-val="{{true}}"><div class="bubble" aria-hidden="true" style="position: absolute; {{bubbleStyle}}; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; background: #FFD23F; color: #0B1210; border: 3px solid #0B1210; border-radius: 10px; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 24px">!</div></sc-if>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 14px; font-size: 13px; color: #7F978A">
+<span>Cada cuadro es un día. Cada día, hierba.</span>
+<span style="display: flex; align-items: center; gap: 4px">Menos <span style="width: 11px; height: 11px; border-radius: 2px; background: #18271F; display: inline-block"></span><span style="width: 11px; height: 11px; border-radius: 2px; background: #1F5133; display: inline-block"></span><span style="width: 11px; height: 11px; border-radius: 2px; background: #2E7D46; display: inline-block"></span><span style="width: 11px; height: 11px; border-radius: 2px; background: #45A85B; display: inline-block"></span><span style="width: 11px; height: 11px; border-radius: 2px; background: #6FDB7A; display: inline-block"></span> Más</span>
+</div>
+<div aria-live="polite" style="margin-top: 18px; background: #0B1210; border: 3px solid #E8F0EA; border-radius: 10px; padding: 16px 18px; font-family: 'Pixelify Sans', sans-serif; font-weight: 500; font-size: 19px; line-height: 1.4; display: flex; justify-content: space-between; align-items: flex-end; gap: 12px">
+<span style="min-width: 0">
+<sc-if value="{{isIdle}}" hint-placeholder-val="{{false}}">{{dialogIdle}}</sc-if>
+<sc-if value="{{isScan}}" hint-placeholder-val="{{false}}">{{dialogScan}}</sc-if>
+<sc-if value="{{isResult}}" hint-placeholder-val="{{true}}">{{dialogResult}} <a href="#resultado" style="font-size: 16px; white-space: nowrap">Ver resultado ↓</a></sc-if>
+</span>
+<span class="blink" aria-hidden="true" style="color: #FFD23F; font-size: 14px">▼</span>
+</div>
+</div>
+</div>
+</section>
+
+<sc-if value="{{isResult}}" hint-placeholder-val="{{true}}">
+<section id="resultado" class="reveal" style="padding: 24px 0 88px">
+<div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 28px; padding-top: 32px; border-top: 2px dashed #22362B">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.08em; color: #6FDB7A">RESULTADO · @{{userShown}}</span>
+<h2 style="margin: 0; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 42px">{{modeTitle}}</h2>
+</div>
+<span style="font-family: Silkscreen, monospace; font-size: 11px; letter-spacing: 0.06em; color: #A9BDB1; border: 2px dashed #34503F; border-radius: 8px; padding: 8px 12px">DEMO · DATOS SIMULADOS CON EL NOMBRE</span>
+</div>
+
+<sc-if value="{{isSolo}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start">
+<article style="flex: 0 1 410px; min-width: 0; background: #111C17; border: 3px solid {{p.color}}; border-radius: 20px; overflow: hidden; box-shadow: 10px 10px 0 {{p.color}}">
+<div style="background: {{p.color}}; color: {{p.fg}}; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.06em">#{{p.num}} · NV. {{p.level}}</span>
+<span style="font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05">{{p.name}}</span>
+</div>
+<sc-if value="{{p.shiny}}" hint-placeholder-val="{{false}}"><span style="font-family: Silkscreen, monospace; font-size: 11px; background: #0B1210; color: #FFD23F; border-radius: 6px; padding: 6px 8px">✦ VARIOCOLOR</span></sc-if>
+</div>
+<div class="dither" style="margin: 18px 18px 14px; aspect-ratio: 1 / 1; border-radius: 14px; background-color: #0B1210; border: 2px dashed #2A4034; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; color: {{p.color}}">
+<svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{p.icon}}"></path></svg>
+<span style="font-family: Silkscreen, monospace; font-size: 11px; letter-spacing: 0.06em; color: #A9BDB1">SPRITE OFICIAL · POKEAPI #{{p.num}}</span>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap; padding: 0 18px">
+<sc-for list="{{types}}" as="t" hint-placeholder-count="2"><span style="font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.04em; padding: 6px 12px; border-radius: 999px; background: {{t.bg}}; color: {{t.fg}}">{{t.label}}</span></sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; padding: 20px 18px 6px">
+<sc-for list="{{stats}}" as="s" hint-placeholder-count="6">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: grid; grid-template-columns: 82px minmax(0, 1fr) 34px; align-items: center; gap: 10px">
+<span style="font-size: 14px; font-weight: 700">{{s.key}}</span>
+<span style="height: 10px; background: #1C2B23; border-radius: 3px; overflow: hidden"><span style="display: block; height: 100%; border-radius: 3px; {{s.width}}"></span></span>
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; text-align: right">{{s.v}}</span>
+</div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7F978A; padding-left: 92px">← {{s.src}}</span>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 14px 18px 18px; margin-top: 10px; border-top: 2px solid #1C2B23; font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.04em; color: #A9BDB1">
+<span>TOTAL BASE {{p.bst}}</span><span style="color: #E8F0EA">{{p.stage}}</span>
+</div>
+</article>
+
+<div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px">
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: Silkscreen, monospace; font-size: 11px; letter-spacing: 0.06em; color: #7F978A">NATURALEZA</span>
+<span style="font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 24px">{{p.nature}}</span>
+<span style="font-size: 13px; color: #A9BDB1">Hora pico {{p.hour}}</span>
+</div>
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: Silkscreen, monospace; font-size: 11px; letter-spacing: 0.06em; color: #7F978A">RITMO</span>
+<span style="font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 24px">{{p.rhythm}}</span>
+<span style="font-size: 13px; color: #A9BDB1">Según tus commits</span>
+</div>
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: Silkscreen, monospace; font-size: 11px; letter-spacing: 0.06em; color: #7F978A">HABILIDAD</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 19px; overflow-wrap: anywhere">{{p.ability}}</span>
+<span style="font-size: 13px; color: #A9BDB1">Tu repo con más estrellas</span>
+</div>
+</div>
+
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 16px; padding: 20px">
+<h3 style="margin: 0 0 14px; font-family: Silkscreen, monospace; font-weight: 400; font-size: 13px; letter-spacing: 0.08em; color: #A9BDB1">MOVIMIENTOS · TUS 4 REPOS TOP</h3>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{moves}}" as="m" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) auto 72px; align-items: center; gap: 12px; padding: 12px 14px; background: #0B1210; border: 2px solid #1C2B23; border-radius: 10px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 15px; overflow-wrap: anywhere">{{m.name}}</span>
+<span style="font-family: Silkscreen, monospace; font-size: 11px; padding: 5px 10px; border-radius: 999px; background: {{m.bg}}; color: {{m.fg}}">{{m.label}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #A9BDB1; text-align: right">POT {{m.power}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 16px; padding: 20px">
+<h3 style="margin: 0 0 12px; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 22px">¿Por qué {{p.name}}?</h3>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{why}}" as="w" hint-placeholder-count="3"><li style="display: flex; gap: 10px; font-size: 16px; line-height: 1.5; color: #C9D8CF"><span aria-hidden="true" style="color: #6FDB7A; font-family: Silkscreen, monospace">▸</span><span>{{w}}</span></li></sc-for>
+</ul>
+</div>
+
+<div style="display: flex; gap: 12px; flex-wrap: wrap">
+<button type="button" class="btn" onClick="{{onCopy}}" style="min-height: 52px; padding: 0 22px; background: #FFD23F; color: #0B1210; border: 0; border-radius: 12px; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 18px; box-shadow: 4px 4px 0 #45A85B">{{copyLabel}}</button>
+<button type="button" class="chip" onClick="{{setTeam}}" style="min-height: 52px; padding: 0 22px; background: transparent; color: #E8F0EA; border: 2px solid #34503F; border-radius: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 16px">Ver mi equipo de 6</button>
+<button type="button" class="chip" onClick="{{reset}}" style="min-height: 52px; padding: 0 22px; background: transparent; color: #A9BDB1; border: 2px solid transparent; border-radius: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 16px; text-decoration: underline">Escanear a otro</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isTeam}}" hint-placeholder-val="{{false}}">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px">
+<sc-for list="{{team}}" as="m" hint-placeholder-count="6">
+<article style="background: #111C17; border: 2px solid #22362B; border-top: 8px solid {{m.color}}; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; justify-content: space-between; font-family: Silkscreen, monospace; font-size: 11px; letter-spacing: 0.06em; color: #7F978A"><span>SLOT {{m.slot}}</span><span>NV. {{m.level}}</span></div>
+<div class="dither" style="aspect-ratio: 4 / 3; border-radius: 12px; background-color: #0B1210; border: 2px dashed #2A4034; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: {{m.color}}">
+<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{m.icon}}"></path></svg>
+<span style="font-family: Silkscreen, monospace; font-size: 10px; color: #7F978A">POKEAPI #{{m.num}}</span>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+<span style="font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 24px">{{m.name}}</span>
+<span style="font-family: Silkscreen, monospace; font-size: 11px; padding: 5px 10px; border-radius: 999px; background: {{m.bg}}; color: {{m.fg}}">{{m.label}}</span>
+</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #A9BDB1; display: flex; justify-content: space-between; gap: 8px; padding-top: 10px; border-top: 2px solid #1C2B23"><span style="overflow-wrap: anywhere">de {{m.repo}}</span><span>★ {{m.stars}}</span></div>
+</article>
+</sc-for>
+</div>
+<div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px; align-items: center">
+<span style="font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.04em; background: #111C17; border: 2px solid #22362B; border-radius: 10px; padding: 12px 14px">COBERTURA {{coverage}} / 18 TIPOS</span>
+<span style="font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.04em; background: #111C17; border: 2px solid #22362B; border-radius: 10px; padding: 12px 14px">VARIEDAD {{synergy}}%</span>
+<span style="font-size: 15px; color: #A9BDB1">Cada repo es un Pokémon: su lenguaje da el tipo y sus estrellas, la etapa.</span>
+<button type="button" class="chip" onClick="{{setSolo}}" style="min-height: 44px; padding: 0 18px; background: transparent; color: #E8F0EA; border: 2px solid #34503F; border-radius: 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; margin-left: auto">Ver mi compañero</button>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<section id="como" style="padding: 72px 0; border-top: 2px solid #1C2B23">
+<p style="margin: 0 0 10px; font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.08em; color: #6FDB7A">CÓMO FUNCIONA</p>
+<h2 style="margin: 0 0 36px; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: clamp(32px, 4vw, 46px); max-width: 760px; line-height: 1.1">Tu perfil es un Pokédex que todavía no has leído.</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 44px; color: #2E7D46">01</span>
+<h3 style="margin: 0; font-size: 21px">Entramos a tu hierba alta</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #A9BDB1">Leemos tu perfil público: repos, lenguajes, estrellas, seguidores, tu gráfica de contribuciones y a qué hora haces commit.</p>
+<code style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #6FDB7A; margin-top: auto">GET /users/:user/repos</code>
+</div>
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 44px; color: #2E7D46">02</span>
+<h3 style="margin: 0; font-size: 21px">Tu código se vuelve tipo</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #A9BDB1">Tu lenguaje principal define tu tipo. El segundo aporta otro, y si programas de madrugada ganas tipo Siniestro.</p>
+<code style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #6FDB7A; margin-top: auto">Python → Veneno · 02:00 → Siniestro</code>
+</div>
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 44px; color: #2E7D46">03</span>
+<h3 style="margin: 0; font-size: 21px">Comparamos formas, no tamaños</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: #A9BDB1">Tu actividad se convierte en 6 estadísticas. Buscamos el Pokémon de tu tipo y etapa cuya distribución se parece más a la tuya.</p>
+<code style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #6FDB7A; margin-top: auto">similitud coseno(tú, él)</code>
+</div>
+</div>
+</section>
+
+<section id="tipos" style="padding: 72px 0; border-top: 2px solid #1C2B23">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: 32px">
+<div>
+<p style="margin: 0 0 10px; font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.08em; color: #6FDB7A">TABLA DE TIPOS DEL CÓDIGO</p>
+<h2 style="margin: 0; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: clamp(32px, 4vw, 46px); line-height: 1.1">Cada lenguaje tiene su elemento.</h2>
+</div>
+<p style="margin: 0; font-size: 16px; color: #A9BDB1; max-width: 380px; line-height: 1.5">Y una regla secreta: si tu hora pico está entre las 22:00 y las 05:00, tu segundo tipo es <strong style="color: #E8F0EA">Siniestro</strong>.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 12px">
+<sc-for list="{{typeTable}}" as="r" hint-placeholder-count="15">
+<div style="display: flex; flex-direction: column; gap: 8px; background: #111C17; border: 2px solid #1C2B23; border-radius: 14px; padding: 16px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px">
+<span style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 16px">{{r.lang}}</span>
+<span style="font-family: Silkscreen, monospace; font-size: 11px; padding: 5px 10px; border-radius: 999px; background: {{r.bg}}; color: {{r.fg}}">{{r.label}}</span>
+</div>
+<span style="font-size: 14px; color: #A9BDB1">{{r.why}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="readme" style="padding: 72px 0; border-top: 2px solid #1C2B23; display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.08em; color: #6FDB7A">TARJETA PARA TU README</p>
+<h2 style="margin: 0; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: clamp(32px, 4vw, 46px); line-height: 1.1">Llévalo a tu perfil.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #A9BDB1">Una línea de Markdown y tu compañero aparece en tu README. Se actualiza solo cada día: si cambias de lenguaje o subes tu racha, evoluciona.</p>
+<div style="background: #060B09; border: 2px solid #22362B; border-radius: 12px; padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6; color: #C9D8CF; overflow-wrap: anywhere">{{snippet}}</div>
+<div><button type="button" class="btn" onClick="{{onCopy}}" style="min-height: 48px; padding: 0 20px; background: #FFD23F; color: #0B1210; border: 0; border-radius: 12px; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 17px; box-shadow: 4px 4px 0 #45A85B">{{copyLabel}}</button></div>
+</div>
+<div style="flex: 1 1 460px; min-width: 0; display: flex; justify-content: center">
+<div style="width: 100%; max-width: 495px; background: #0D1117; border: 1px solid #30363D; border-radius: 10px; padding: 18px; display: flex; gap: 18px; align-items: center">
+<div class="dither" style="flex: 0 0 120px; height: 120px; border-radius: 10px; background-color: #161B22; border: 1px dashed #30363D; display: flex; align-items: center; justify-content: center; color: {{p.color}}">
+<svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{p.icon}}"></path></svg>
+</div>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Silkscreen, monospace; font-size: 11px; color: #8B949E">@{{userShown}} · GITMON</span>
+<span style="font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 24px; color: #E6EDF3">{{p.name}} <span style="font-size: 15px; color: #8B949E">Nv. {{p.level}}</span></span>
+<div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{types}}" as="t" hint-placeholder-count="2"><span style="font-family: Silkscreen, monospace; font-size: 10px; padding: 4px 8px; border-radius: 999px; background: {{t.bg}}; color: {{t.fg}}">{{t.label}}</span></sc-for></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 10px; margin-top: 4px">
+<sc-for list="{{stats}}" as="s" hint-placeholder-count="6"><div style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 10px; color: #8B949E">{{s.key}} {{s.v}}</span><span style="height: 4px; background: #21262D; border-radius: 2px; overflow: hidden"><span style="display: block; height: 100%; {{s.width}}"></span></span></div></sc-for>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<footer style="padding: 36px 0 48px; border-top: 2px solid #1C2B23; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 14px; color: #7F978A; line-height: 1.6">
+<span style="max-width: 720px">Gitmon es un proyecto fan sin ánimo de lucro. Pokémon y los nombres asociados son marcas de Nintendo, Creatures Inc. y GAME FREAK. Datos de PokeAPI y de la API pública de GitHub.</span>
+<span style="font-family: Silkscreen, monospace; font-size: 12px">v0 · BOCETO</span>
+</footer>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":4300}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { user: 'FelipeBeltranING', shown: 'FelipeBeltranING', phase: 'result', mode: 'solo', copied: '' };
+    this.timer = null;
+    this.copyTimer = null;
+    this.onUser = (e) => this.setState({ user: e.target.value });
+    this.onSubmit = (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      if (this.state.phase === 'scan') return;
+      const shown = (this.state.user || '').trim() || 'octocat';
+      clearTimeout(this.timer);
+      this.setState({ phase: 'scan', shown: shown, copied: '' });
+      this.timer = setTimeout(() => this.setState({ phase: 'result' }), 2600);
+    };
+    this.setSolo = () => this.setState({ mode: 'solo' });
+    this.setTeam = () => this.setState({ mode: 'equipo' });
+    this.reset = () => { clearTimeout(this.timer); this.setState({ phase: 'idle', user: '', copied: '' }); };
+    this.onCopy = () => {
+      const txt = this.snippet(this.state.shown);
+      const done = (msg) => {
+        this.setState({ copied: msg });
+        clearTimeout(this.copyTimer);
+        this.copyTimer = setTimeout(() => this.setState({ copied: '' }), 2200);
+      };
+      try {
+        navigator.clipboard.writeText(txt).then(() => done('¡Copiado!'), () => done('Cópialo a mano'));
+      } catch (err) { done('Cópialo a mano'); }
+    };
+  }
+
+  componentWillUnmount() { clearTimeout(this.timer); clearTimeout(this.copyTimer); }
+
+  snippet(u) {
+    return '[![Mi Gitmon](https://[tu-dominio]/api/card?user=' + u + ')](https://[tu-dominio])';
+  }
+
+  hash(s) {
+    let h = 2166136261 >>> 0;
+    const t = s.toLowerCase();
+    for (let i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    return h >>> 0;
+  }
+
+  rng(seed) {
+    let a = seed >>> 0;
+    return function () {
+      a = (a + 0x6D2B79F5) >>> 0;
+      let t = a;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  data() {
+    const T = {
+      normal: { label: 'Normal', bg: '#A8A77A', fg: '#141414', icon: 'M12 4a8 8 0 1 0 0 16a8 8 0 1 0 0-16M12 9a3 3 0 1 0 0 6a3 3 0 1 0 0-6' },
+      fuego: { label: 'Fuego', bg: '#EE8130', fg: '#141414', icon: 'M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2.5 1.2-4 2.5-5 0 2 1 3.2 2.2 3.2C11.7 8.5 10.8 6 12 3z' },
+      agua: { label: 'Agua', bg: '#6390F0', fg: '#141414', icon: 'M12 3c3.2 4.6 6 7.6 6 11a6 6 0 0 1-12 0c0-3.4 2.8-6.4 6-11z' },
+      electrico: { label: 'Eléctrico', bg: '#F7D02C', fg: '#141414', icon: 'M13 2 5 14h6l-1 8 8-12h-6z' },
+      planta: { label: 'Planta', bg: '#7AC74C', fg: '#141414', icon: 'M5 19C5 11 10 5 20 5c0 10-6 15-14 15M5 19l7-7' },
+      hielo: { label: 'Hielo', bg: '#96D9D6', fg: '#141414', icon: 'M12 2v20M3.4 7l17.2 10M20.6 7 3.4 17M9 4l3 2 3-2M9 20l3-2 3 2' },
+      lucha: { label: 'Lucha', bg: '#C22E28', fg: '#FFFFFF', icon: 'M6 10h12v6a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4zM6 10V7M10 10V5M14 10V5M18 10V7' },
+      veneno: { label: 'Veneno', bg: '#A33EA1', fg: '#FFFFFF', icon: 'M4 15a4 4 0 1 0 8 0a4 4 0 1 0-8 0M13 8a3 3 0 1 0 6 0a3 3 0 1 0-6 0M15 18a2 2 0 1 0 4 0a2 2 0 1 0-4 0' },
+      tierra: { label: 'Tierra', bg: '#E2BF65', fg: '#141414', icon: 'M3 20h18M3 16h18M6 12l6-7 6 7' },
+      volador: { label: 'Volador', bg: '#A98FF3', fg: '#141414', icon: 'M3 17c6 0 11-3 18-12-2 8-6 13-13 13M7 14l4-4' },
+      psiquico: { label: 'Psíquico', bg: '#F95587', fg: '#141414', icon: 'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM9 12a3 3 0 1 0 6 0a3 3 0 1 0-6 0' },
+      fantasma: { label: 'Fantasma', bg: '#735797', fg: '#FFFFFF', icon: 'M6 21V10a6 6 0 0 1 12 0v11l-2-2-2 2-2-2-2 2-2-2zM10 10h.01M14 10h.01' },
+      dragon: { label: 'Dragón', bg: '#6F35FC', fg: '#FFFFFF', icon: 'M4 20c4-1 6-4 6-8 3 0 6-2 7-6 1 3 3 4 4 4-1 5-5 9-11 10M14 9h.01' },
+      siniestro: { label: 'Siniestro', bg: '#705746', fg: '#FFFFFF', icon: 'M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z' },
+      acero: { label: 'Acero', bg: '#B7B7CE', fg: '#141414', icon: 'M12 2l8.5 5v10L12 22l-8.5-5V7zM9 12a3 3 0 1 0 6 0a3 3 0 1 0-6 0' },
+      hada: { label: 'Hada', bg: '#D685AD', fg: '#141414', icon: 'M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z' }
+    };
+    const LANGS = [
+      { lang: 'JavaScript', type: 'electrico', why: 'corre en todas partes' },
+      { lang: 'TypeScript', type: 'psiquico', why: 've los errores antes de que pasen' },
+      { lang: 'Python', type: 'veneno', why: 'es una serpiente, obvio' },
+      { lang: 'Java', type: 'fuego', why: 'café hirviendo' },
+      { lang: 'C / C++', type: 'lucha', why: 'cuerpo a cuerpo con la memoria' },
+      { lang: 'Rust', type: 'acero', why: 'armadura de memoria segura' },
+      { lang: 'Go', type: 'agua', why: 'todo fluye por canales' },
+      { lang: 'Swift', type: 'volador', why: 'el nombre lo dice todo' },
+      { lang: 'Kotlin', type: 'planta', why: 'el verde de Android' },
+      { lang: 'Ruby', type: 'hada', why: 'literalmente una gema' },
+      { lang: 'PHP', type: 'fantasma', why: 'dicen que murió; sigue en todas partes' },
+      { lang: 'GDScript', type: 'dragon', why: 'los que hacen videojuegos' },
+      { lang: 'Shell', type: 'tierra', why: 'pegado al metal' },
+      { lang: 'Lua', type: 'hielo', why: 'luna fría, scripts ligeros' },
+      { lang: 'HTML / CSS', type: 'normal', why: 'todos empezamos aquí' }
+    ];
+    const POOL = {
+      electrico: [['Pichu', 172], ['Pikachu', 25], ['Raichu', 26], ['Zapdos', 145]],
+      psiquico: [['Abra', 63], ['Kadabra', 64], ['Alakazam', 65], ['Deoxys', 386]],
+      veneno: [['Ekans', 23], ['Arbok', 24], ['Seviper', 336], ['Eternatus', 890]],
+      fuego: [['Charmander', 4], ['Charmeleon', 5], ['Charizard', 6], ['Moltres', 146]],
+      lucha: [['Machop', 66], ['Machoke', 67], ['Machamp', 68], ['Marshadow', 802]],
+      acero: [['Beldum', 374], ['Metang', 375], ['Metagross', 376], ['Genesect', 649]],
+      agua: [['Mudkip', 258], ['Marshtomp', 259], ['Swampert', 260], ['Kyogre', 382]],
+      volador: [['Starly', 396], ['Staravia', 397], ['Staraptor', 398], ['Lugia', 249]],
+      planta: [['Bulbasaur', 1], ['Ivysaur', 2], ['Venusaur', 3], ['Celebi', 251]],
+      hada: [['Cleffa', 173], ['Clefairy', 35], ['Clefable', 36], ['Xerneas', 716]],
+      fantasma: [['Gastly', 92], ['Haunter', 93], ['Gengar', 94], ['Giratina', 487]],
+      dragon: [['Dratini', 147], ['Dragonair', 148], ['Dragonite', 149], ['Rayquaza', 384]],
+      tierra: [['Trapinch', 328], ['Vibrava', 329], ['Flygon', 330], ['Groudon', 383]],
+      hielo: [['Spheal', 363], ['Sealeo', 364], ['Walrein', 365], ['Articuno', 144]],
+      normal: [['Porygon', 137], ['Porygon2', 233], ['Porygon-Z', 474], ['Arceus', 493]]
+    };
+    return { T, LANGS, POOL };
+  }
+
+  compute(name) {
+    const { T, LANGS, POOL } = this.data();
+    const h = this.hash(name);
+    const r = this.rng(h);
+    const pad = (n) => String(n).padStart(4, '0');
+    const badge = (k) => ({ label: T[k].label, bg: T[k].bg, fg: T[k].fg });
+
+    const idx = LANGS.map((_, i) => i);
+    for (let i = idx.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); const t = idx[i]; idx[i] = idx[j]; idx[j] = t; }
+    const mine = [LANGS[idx[0]], LANGS[idx[1]], LANGS[idx[2]]];
+
+    const raw = {
+      repos: 4 + Math.floor(r() * 90),
+      years: 1 + Math.floor(r() * 10),
+      commits: 40 + Math.floor(r() * 2600),
+      prs: Math.floor(r() * r() * 220),
+      stars: Math.floor(Math.pow(r(), 2.2) * 1200),
+      followers: Math.floor(Math.pow(r(), 2) * 500),
+      streak: 1 + Math.floor(r() * r() * 120),
+      hour: Math.floor(r() * 24)
+    };
+    const sc = (x, max) => Math.round(10 + 150 * Math.pow(Math.min(1, Math.log(1 + x) / Math.log(1 + max)), 2.4));
+    const primary = mine[0].type;
+    const night = raw.hour >= 22 || raw.hour < 5;
+    const secondary = night ? 'siniestro' : (mine[1].type !== primary ? mine[1].type : null);
+    const color = T[primary].bg;
+    const stats = [
+      { key: 'PS', v: sc(raw.repos * raw.years, 600), src: raw.repos + ' repos × ' + raw.years + ' años' },
+      { key: 'Ataque', v: sc(raw.commits, 3000), src: raw.commits + ' commits este año' },
+      { key: 'Defensa', v: sc(raw.prs, 250), src: raw.prs + ' PRs fusionados' },
+      { key: 'At. Esp.', v: sc(raw.stars, 1500), src: raw.stars + ' estrellas' },
+      { key: 'Def. Esp.', v: sc(raw.followers, 600), src: raw.followers + ' seguidores' },
+      { key: 'Velocidad', v: sc(raw.streak, 150), src: 'racha de ' + raw.streak + ' días' }
+    ].map((s) => Object.assign(s, { width: 'width:' + Math.round(s.v / 160 * 100) + '%;background:' + color }));
+    const bst = stats.reduce((a, s) => a + s.v, 0);
+    const tier = bst < 420 ? 0 : bst < 540 ? 1 : bst < 690 ? 2 : 3;
+    const mon = POOL[primary][tier];
+    const stage = ['Básico', 'Fase 1', 'Fase final', 'Legendario'][tier];
+    const h24 = raw.hour;
+    const nature = h24 >= 5 && h24 < 11 ? 'Activa' : h24 < 17 && h24 >= 11 ? 'Seria' : h24 >= 17 && h24 < 22 ? 'Alegre' : 'Osada';
+    const rhythm = h24 >= 5 && h24 < 11 ? 'Madrugador' : h24 < 17 && h24 >= 11 ? 'De oficina' : h24 >= 17 && h24 < 22 ? 'De atardecer' : 'Búho nocturno';
+
+    const NAMES = ['dotfiles', 'api-rest', 'portfolio', 'bot-discord', 'todo-app', 'game-jam', 'scraper', 'cli-tools', 'apuntes', 'landing', 'chat-sockets', 'pixel-art'];
+    for (let i = NAMES.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); const t = NAMES[i]; NAMES[i] = NAMES[j]; NAMES[j] = t; }
+    const repos = NAMES.slice(0, 6).map((n, i) => {
+      const L = r() < 0.75 ? mine[Math.floor(r() * 3)] : LANGS[Math.floor(r() * LANGS.length)];
+      return { name: n, lang: L, stars: Math.floor(raw.stars * Math.pow(r(), 1.4) * (i === 0 ? 1 : 0.55)), commits: 5 + Math.floor(r() * 400) };
+    }).sort((a, b) => b.stars - a.stars);
+
+    const moves = repos.slice(0, 4).map((rp) => ({
+      name: rp.name, label: T[rp.lang.type].label, bg: T[rp.lang.type].bg, fg: T[rp.lang.type].fg,
+      power: Math.min(150, Math.round((30 + 6 * Math.sqrt(rp.stars)) / 5) * 5)
+    }));
+
+    const types = [badge(primary)].concat(secondary ? [badge(secondary)] : []);
+    const why = [
+      'Tu lenguaje principal es ' + mine[0].lang + ' → tipo ' + T[primary].label + ' (' + mine[0].why + ').',
+      night
+        ? 'Tu hora pico son las ' + String(h24).padStart(2, '0') + ':00. Los búhos nocturnos ganan tipo Siniestro.'
+        : 'Tu segundo lenguaje, ' + mine[1].lang + ', ' + (secondary ? 'aporta tipo ' + T[secondary].label + '.' : 'refuerza el mismo tipo.'),
+      'Total base ' + bst + ' → etapa ' + stage + '. Entre los ' + T[primary].label + ' de esa etapa, ' + mon[0] + ' es el de forma de estadísticas más parecida a la tuya.'
+    ];
+
+    const used = {};
+    const team = repos.map((rp, i) => {
+      const k = rp.lang.type;
+      let t = rp.stars < 15 ? 0 : rp.stars < 80 ? 1 : rp.stars < 600 ? 2 : 3;
+      const top = t === 3 ? 3 : 2;
+      const order = [t, t - 1, t + 1, t - 2, t + 2].filter((x) => x >= 0 && x <= top);
+      let pick = order.find((x) => !used[POOL[k][x][0]]);
+      if (pick === undefined) pick = t;
+      used[POOL[k][pick][0]] = true;
+      const m = POOL[k][pick];
+      return {
+        slot: i + 1, name: m[0], num: pad(m[1]), repo: rp.name, stars: rp.stars, lang: rp.lang.lang,
+        level: Math.min(100, 5 + Math.round(rp.commits / 6)), color: T[k].bg, icon: T[k].icon,
+        label: T[k].label, bg: T[k].bg, fg: T[k].fg
+      };
+    });
+    const uniq = {};
+    team.forEach((m) => { uniq[m.label] = true; });
+    const coverage = Object.keys(uniq).length;
+
+    const r2 = this.rng(h ^ 0x9e3779b9);
+    const levels = [];
+    for (let i = 0; i < 210; i++) { const v = r2(); levels.push(v < 0.35 ? 0 : v < 0.6 ? 1 : v < 0.8 ? 2 : v < 0.93 ? 3 : 4); }
+    let enc = 70 + Math.floor(r2() * 120);
+    levels[enc] = 4;
+
+    return {
+      p: {
+        name: mon[0], num: pad(mon[1]), color: color, fg: T[primary].fg, icon: T[primary].icon,
+        level: Math.min(100, 5 + Math.round(raw.commits / 28)), shiny: h % 4096 === 0,
+        bst: bst, stage: stage, nature: nature, rhythm: rhythm, ability: repos[0].name, hour: String(h24).padStart(2, '0') + ':00'
+      },
+      types, stats, moves, why, team, coverage, synergy: Math.round(coverage / 6 * 100),
+      levels, enc, mine
+    };
+  }
+
+  renderVals() {
+    const st = this.state;
+    const phase = st.phase;
+    const isScan = phase === 'scan';
+    const isResult = phase === 'result';
+    const liveName = isResult || isScan ? st.shown : ((st.user || '').trim() || 'octocat');
+    const res = this.compute(isResult || isScan ? st.shown : liveName);
+    const GR = ['#18271F', '#1F5133', '#2E7D46', '#45A85B', '#6FDB7A'];
+    const cells = res.levels.map((lv, i) => {
+      const col = Math.floor(i / 7);
+      const row = i % 7;
+      const hit = isResult && i === res.enc;
+      return {
+        style: (hit ? 'background:#FFD23F;box-shadow:0 0 0 2px #0B1210,0 0 16px 2px rgba(255,210,63,.8)' : 'background:' + GR[lv]) +
+          ';animation-delay:' + (col * 45 + row * 22) + 'ms'
+      };
+    });
+    const ec = Math.floor(res.enc / 7);
+    const er = res.enc % 7;
+    const pressedStyle = 'background:#E8F0EA;color:#0B1210;border:2px solid #E8F0EA';
+    const idleStyle = 'background:transparent;color:#E8F0EA;border:2px solid #34503F';
+    const isSolo = st.mode === 'solo';
+    return {
+      user: st.user,
+      onUser: this.onUser,
+      onSubmit: this.onSubmit,
+      setSolo: this.setSolo,
+      setTeam: this.setTeam,
+      reset: this.reset,
+      onCopy: this.onCopy,
+      isScan: isScan,
+      isResult: isResult,
+      isIdle: phase === 'idle',
+      isSolo: isSolo,
+      isTeam: !isSolo,
+      soloPressed: isSolo,
+      teamPressed: !isSolo,
+      soloStyle: isSolo ? pressedStyle : idleStyle,
+      teamStyle: !isSolo ? pressedStyle : idleStyle,
+      ctaLabel: isScan ? 'Escaneando…' : isResult ? 'Escanear de nuevo' : 'Lanzar escaneo',
+      gridClass: isScan ? 'grass scan' : 'grass',
+      cells: cells,
+      bubbleStyle: 'left:' + ((ec + 0.5) / 30 * 100).toFixed(2) + '%;top:' + (er / 7 * 100).toFixed(2) + '%',
+      userShown: liveName,
+      statusText: isScan ? 'ESCANEANDO' : isResult ? '¡ENCUENTRO!' : 'EN ESPERA',
+      dialogScan: 'Buscando en 365 días de commits de @' + st.shown + '…',
+      dialogIdle: 'La hierba alta de @' + liveName + ' se mueve… Lanza el escaneo para entrar.',
+      dialogResult: '¡Un ' + res.p.name.toUpperCase() + ' salvaje salió de tus commits!',
+      p: res.p,
+      types: res.types,
+      stats: res.stats,
+      moves: res.moves,
+      why: res.why,
+      team: res.team,
+      coverage: res.coverage,
+      synergy: res.synergy,
+      typeTable: this.data().LANGS.map((L) => {
+        const t = this.data().T[L.type];
+        return { lang: L.lang, why: L.why, label: t.label, bg: t.bg, fg: t.fg };
+      }),
+      snippet: this.snippet(st.shown),
+      copyLabel: st.copied || 'Copiar Markdown',
+      modeTitle: isSolo ? 'Tu compañero' : 'Tu equipo'
+    };
+  }
+}
+</script>
+<script>
+// dc-lite: renderizador mínimo para ver los artboards .dc.html fuera del canvas original.
+// Soporta {{holes}}, <sc-for>, <sc-if>, eventos onX, <helmet> y una clase Component extends DCLogic.
+(function () {
+  function DCLogic(props) { this.props = props || {}; this.state = {}; }
+  DCLogic.prototype.setState = function (p) {
+    var patch = typeof p === 'function' ? p(this.state, this.props) : p;
+    this.state = Object.assign({}, this.state, patch);
+    if (this.__render) this.__render();
+  };
+  DCLogic.prototype.forceUpdate = function () { if (this.__render) this.__render(); };
+  window.DCLogic = DCLogic;
+
+  var HOLE = /\{\{\s*([^}]+?)\s*\}\}/g;
+  var WHOLE = /^\s*\{\{\s*([^}]+?)\s*\}\}\s*$/;
+
+  function lookup(path, scopes) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (path === 'null') return null;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+    if (/^(['"]).*\1$/.test(path)) return path.slice(1, -1);
+    var parts = path.split('.');
+    for (var i = scopes.length - 1; i >= 0; i--) {
+      if (scopes[i] && Object.prototype.hasOwnProperty.call(scopes[i], parts[0])) {
+        var v = scopes[i][parts[0]];
+        for (var j = 1; j < parts.length; j++) v = v == null ? undefined : v[parts[j]];
+        return v;
+      }
+    }
+    return undefined;
+  }
+  function interp(str, scopes) {
+    return str.replace(HOLE, function (_, p) { var v = lookup(p, scopes); return v == null ? '' : String(v); });
+  }
+
+  var EVENTS = { onclick: 'click', onsubmit: 'submit', oninput: 'input', onkeydown: 'keydown', onfocus: 'focus', onblur: 'blur', onmouseenter: 'mouseenter', onmouseleave: 'mouseleave' };
+
+  function processAttrs(el, scopes) {
+    var attrs = Array.prototype.slice.call(el.attributes);
+    attrs.forEach(function (a) {
+      if (a.value.indexOf('{{') === -1) return;
+      var name = a.name.toLowerCase();
+      var m = a.value.match(WHOLE);
+      if (m) {
+        var v = lookup(m[1], scopes);
+        if (name.indexOf('on') === 0) {
+          el.removeAttribute(a.name);
+          var ev = name === 'onchange' ? (/^(INPUT|TEXTAREA)$/.test(el.tagName) ? 'input' : 'change') : (EVENTS[name] || name.slice(2));
+          if (typeof v === 'function') el.addEventListener(ev, v);
+          return;
+        }
+        if (name === 'ref') { el.removeAttribute(a.name); if (typeof v === 'function') v(el); else if (v && typeof v === 'object') v.current = el; return; }
+        if (v === false || v == null) {
+          if (name.indexOf('aria-') === 0) el.setAttribute(a.name, 'false'); else el.removeAttribute(a.name);
+          return;
+        }
+        if (v === true) { el.setAttribute(a.name, name.indexOf('aria-') === 0 ? 'true' : ''); return; }
+        el.setAttribute(a.name, String(v));
+        return;
+      }
+      el.setAttribute(a.name, interp(a.value, scopes));
+    });
+  }
+
+  function processChildren(parent, scopes) {
+    var kids = Array.prototype.slice.call(parent.childNodes);
+    kids.forEach(function (n) { processNode(n, scopes); });
+  }
+
+  function processNode(node, scopes) {
+    if (node.nodeType === 3) {
+      if (node.nodeValue.indexOf('{{') !== -1) node.nodeValue = interp(node.nodeValue, scopes);
+      return;
+    }
+    if (node.nodeType !== 1) return;
+    var tag = node.tagName.toLowerCase();
+    if (tag === 'sc-if') {
+      var val = lookup((node.getAttribute('value') || '').replace(/[{}]/g, ''), scopes);
+      var frag = document.createDocumentFragment();
+      if (val) {
+        while (node.firstChild) frag.appendChild(node.firstChild);
+        processChildren(frag, scopes);
+      }
+      node.parentNode.replaceChild(frag, node);
+      return;
+    }
+    if (tag === 'sc-for') {
+      var list = lookup((node.getAttribute('list') || '').replace(/[{}]/g, ''), scopes) || [];
+      var as = node.getAttribute('as') || 'item';
+      var out = document.createDocumentFragment();
+      list.forEach(function (item, i) {
+        var f = document.createDocumentFragment();
+        Array.prototype.forEach.call(node.childNodes, function (c) { f.appendChild(c.cloneNode(true)); });
+        var s = {}; s[as] = item; s.$index = i;
+        processChildren(f, scopes.concat([s]));
+        out.appendChild(f);
+      });
+      node.parentNode.replaceChild(out, node);
+      return;
+    }
+    processAttrs(node, scopes);
+    if (tag === 'template') return;
+    processChildren(node, scopes);
+  }
+
+  function mount() {
+    var host = document.querySelector('x-dc');
+    if (!host) return;
+    var helmet = host.querySelector('helmet');
+    if (helmet) {
+      Array.prototype.slice.call(helmet.children).forEach(function (c) { document.head.appendChild(c); });
+      helmet.parentNode.removeChild(helmet);
+    }
+    var tpl = document.createElement('template');
+    tpl.innerHTML = host.innerHTML;
+    host.innerHTML = '';
+    host.style.display = 'block';
+
+    var script = document.querySelector('script[data-dc-script]');
+    var props = {};
+    try {
+      var decl = JSON.parse(script.getAttribute('data-props') || '{}');
+      Object.keys(decl).forEach(function (k) { if (k[0] !== '$' && decl[k] && 'default' in decl[k]) props[k] = decl[k].default; });
+    } catch (e) {}
+    var Component = new Function('DCLogic', script.textContent + '\n;return Component;')(DCLogic);
+    var comp = new Component(props);
+    if (!comp.state) comp.state = {};
+
+    var queued = false;
+    function render() {
+      var active = document.activeElement;
+      var activeId = active && active.id;
+      var selStart = null, selEnd = null;
+      try { if (activeId && active.selectionStart != null) { selStart = active.selectionStart; selEnd = active.selectionEnd; } } catch (e) {}
+      var vals = comp.renderVals ? comp.renderVals() : {};
+      var frag = tpl.content.cloneNode(true);
+      processChildren(frag, [vals]);
+      host.innerHTML = '';
+      host.appendChild(frag);
+      if (activeId) {
+        var again = document.getElementById(activeId);
+        if (again) { again.focus(); try { if (selStart != null) again.setSelectionRange(selStart, selEnd); } catch (e) {} }
+      }
+    }
+    comp.__render = function () {
+      if (queued) return;
+      queued = true;
+      Promise.resolve().then(function () { queued = false; render(); });
+    };
+    render();
+    if (comp.componentDidMount) comp.componentDidMount();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount); else mount();
+})();
+
+</script>
+</body>
+</html>
