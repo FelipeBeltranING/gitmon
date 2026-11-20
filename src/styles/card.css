@@ -1,0 +1,52 @@
+/* ---------- carta (escala con su contenedor) ---------- */
+.slot{position:relative;container-type:inline-size;aspect-ratio:63/88}
+.card{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.2,.8,.2,1);transform:rotateY(180deg)}
+.card.up{transform:rotateY(0)}
+.face,.back{position:absolute;inset:0;border-radius:5cqw;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 3cqw 7cqw rgba(0,0,0,.35)}
+.back{transform:rotateY(180deg);background:radial-gradient(circle,#3A6FD8,#1B3E8A);border:4cqw solid #F6D35B;display:grid;place-items:center;overflow:hidden}
+.back::before{content:"";position:absolute;inset:0;background:repeating-conic-gradient(rgba(255,255,255,.08) 0 10deg,transparent 10deg 20deg)}
+.back .pb{--s:42cqw;box-shadow:0 0 0 3cqw rgba(255,255,255,.15)}
+.back b{position:absolute;bottom:6cqw;font:400 8cqw 'Lilita One';color:#F6D35B;letter-spacing:.8cqw;-webkit-text-stroke:.6cqw var(--ink);paint-order:stroke fill}
+.face{background:linear-gradient(135deg,#FFE680,#E9B800 40%,#FFF0A8 60%,#D7A700);padding:3.3cqw}
+.r-leyenda .face{background:linear-gradient(135deg,#FFF6C4,#D99B00 25%,#FFF8D8 45%,#C48500 65%,#FFE680);box-shadow:0 0 8cqw rgba(255,214,70,.95),0 3cqw 7cqw rgba(0,0,0,.35)}
+.r-vario .face{background:linear-gradient(135deg,#FAFAFF,#AEB4C8 30%,#FFFFFF 50%,#939BB4 70%,#E9ECF7);box-shadow:0 0 8cqw rgba(200,220,255,.95),0 3cqw 7cqw rgba(0,0,0,.35)}
+.tilt{width:100%;height:100%;transition:transform .12s}
+.inner{position:relative;height:100%;border-radius:2.8cqw;overflow:hidden;display:flex;flex-direction:column;padding:2.2cqw 3.3cqw 2.8cqw;
+  background:linear-gradient(170deg,color-mix(in srgb,var(--tc) 35%,#fff),color-mix(in srgb,var(--tc) 75%,#fff) 60%,color-mix(in srgb,var(--tc) 45%,#fff))}
+.ctop{display:flex;align-items:center;gap:1.8cqw}
+.stg{font-weight:900;font-size:2.7cqw;background:linear-gradient(#eee,#bbb);border:.4cqw solid var(--ink);border-radius:1cqw;padding:0 1.4cqw;white-space:nowrap}
+.cname{font-family:'Lilita One';font-size:7cqw;line-height:1.1;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chp{font-weight:900;font-size:3.2cqw;white-space:nowrap}.chp b{font:400 6.6cqw 'Lilita One'}
+.tdot{width:6.6cqw;height:6.6cqw;border-radius:50%;background:var(--c);border:.55cqw solid var(--ink);display:grid;place-items:center;color:#fff;font-weight:900;font-size:3cqw;flex:none;text-shadow:0 .3cqw 0 rgba(0,0,0,.4)}
+.art{position:relative;z-index:7;margin-top:1.2cqw;height:42%;border:1.4cqw solid;border-color:#F6E7A6 #C9A93A #C9A93A #F6E7A6;overflow:hidden;
+  background:radial-gradient(circle at 50% 70%,#fff,color-mix(in srgb,var(--tc) 60%,#fff) 60%,var(--tc))}
+.art::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.18) 0 3cqw,transparent 3cqw 6cqw)}
+.art img{position:absolute;z-index:1;inset:0;margin:auto;height:100%;filter:drop-shadow(0 1.6cqw 1cqw rgba(0,0,0,.3))}
+.ribbon{position:absolute;z-index:2;top:2cqw;left:-1cqw;background:var(--red);color:#fff;font:900 2.8cqw Nunito;letter-spacing:.3cqw;padding:.6cqw 2.6cqw;border:.4cqw solid var(--ink);transform:rotate(-4deg)}
+.strip{margin:1.4cqw 1.6cqw 0;background:linear-gradient(90deg,#C9A93A,#F6E7A6,#C9A93A);border:.4cqw solid #8A7020;font-size:2.7cqw;font-weight:800;font-style:italic;text-align:center;padding:.3cqw 1cqw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.atks{flex:1;display:flex;flex-direction:column;justify-content:center;gap:.6cqw}
+.atk{display:grid;grid-template-columns:15cqw 1fr auto;align-items:center;gap:1.6cqw;padding:1cqw 0;border-bottom:.4cqw solid rgba(0,0,0,.18)}
+.atk:last-child{border:0}
+.en{display:flex;gap:.5cqw;flex-wrap:wrap}.en i{width:3.8cqw;height:3.8cqw;border-radius:50%;background:var(--c);border:.4cqw solid var(--ink)}
+.atk b{font-weight:900;font-size:3.9cqw;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.atk small{display:block;font-size:2.6cqw;font-weight:700;line-height:1.15;opacity:.8;max-height:2.35em;overflow:hidden}
+.atk .dmg{font:400 6.1cqw 'Lilita One';min-width:6cqw;text-align:right}
+.wrr{display:grid;grid-template-columns:repeat(3,1fr);font-size:2.5cqw;font-weight:900;text-align:center;border-top:.55cqw solid rgba(0,0,0,.3);padding-top:1cqw}
+.wrr div{display:flex;flex-direction:column;align-items:center;gap:.5cqw}
+.wrr .v{display:flex;align-items:center;gap:.8cqw;font-size:3.3cqw}
+.wrr .v i{width:3.6cqw;height:3.6cqw;border-radius:50%;background:var(--c,#eee);border:.4cqw solid var(--ink)}
+.cflv{font-size:2.6cqw;font-style:italic;font-weight:700;border:.4cqw solid #C9A93A;background:rgba(255,255,255,.55);padding:1cqw 1.6cqw;margin-top:1.4cqw;line-height:1.25;max-height:4.4em;overflow:hidden}
+.cfoot{display:flex;justify-content:space-between;align-items:center;font-size:2.4cqw;font-weight:900;margin-top:1cqw}
+.cfoot span:first-child{opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70%}
+.sym{font-size:3.2cqw}
+.holo,.glare,.spark{position:absolute;inset:0;pointer-events:none}
+.holo{z-index:0;display:none;mix-blend-mode:color-dodge;opacity:.75;
+  background:linear-gradient(115deg,transparent 25%,rgba(255,0,170,.5) 35%,rgba(0,230,255,.5) 45%,rgba(255,255,0,.5) 55%,rgba(0,255,140,.45) 62%,transparent 72%) var(--hx,50%) var(--hy,50%)/300% 300%}
+.r-holo .holo,.r-leyenda .holo,.r-vario .holo{display:block}
+.shine{position:absolute;inset:0;pointer-events:none;z-index:5;display:none;mix-blend-mode:overlay;opacity:.3;background:linear-gradient(115deg,transparent 30%,rgba(255,0,170,.6) 40%,rgba(0,230,255,.6) 50%,rgba(255,255,0,.6) 60%,transparent 70%) var(--hx,50%) var(--hy,50%)/300% 300%}
+.r-leyenda .shine,.r-vario .shine{display:block}
+.glare,.shine{opacity:0;transition:opacity .3s}.slot:hover .glare{opacity:1}.slot:hover .shine{opacity:.3}
+.glare{z-index:6;background:radial-gradient(circle at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.5),transparent 45%);mix-blend-mode:overlay}
+.spark{z-index:8;display:none;background:radial-gradient(1.2cqw 1.2cqw at 20% 30%,#fff,transparent),radial-gradient(1cqw 1cqw at 80% 20%,#fff,transparent),radial-gradient(1.4cqw 1.4cqw at 70% 70%,#fff,transparent),radial-gradient(1cqw 1cqw at 30% 80%,#fff,transparent);animation:twinkle 1.4s ease-in-out infinite}
+.r-vario .spark,.r-leyenda .spark{display:block}
+@keyframes twinkle{50%{opacity:.2}}
