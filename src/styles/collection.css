@@ -1,0 +1,20 @@
+/* ---------- colección ---------- */
+.coll{background:#FFF6DC;padding:46px clamp(16px,4vw,40px) 60px;
+  background-image:radial-gradient(circle at 20px 20px,rgba(227,53,13,.07) 9px,transparent 10px);background-size:80px 80px}
+.coll-h{max-width:1120px;margin:0 auto 26px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.coll-h h2{font:400 clamp(32px,4.5vw,50px)/1 'Lilita One';color:#fff;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill;text-shadow:0 5px 0 var(--ink)}
+.coll-h p{font-weight:800;color:#5b5348}
+.count{font:900 15px Nunito;background:var(--ink);color:var(--yellow);border-radius:99px;padding:6px 14px}
+.binder{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,280px));gap:28px 24px;justify-content:center}
+.binder .slot{border-radius:5cqw;outline:3px dashed rgba(29,29,43,.25);outline-offset:-3px;display:grid;place-items:center}
+.binder .slot.empty::after{content:"?";font:400 30cqw 'Lilita One';color:rgba(29,29,43,.15)}
+.binder .slot.filled{outline:0}
+.binder .slot.filled .card{animation:land .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes land{from{transform:scale(.6) translateY(-30%);opacity:0}}
+.cap{text-align:center;font-weight:900;font-size:13px;margin-top:10px;display:flex;justify-content:center;gap:8px;align-items:center;min-width:0}
+.cap span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.cap .rb{white-space:nowrap;flex:none}
+.cap .rb{border:2px solid var(--ink);border-radius:99px;padding:1px 9px;background:#fff}
+.cap .rb.holo-b{background:linear-gradient(90deg,#FFB3E6,#B3F0FF,#FFF3A3)}
+.cap .rb.ley-b{background:linear-gradient(90deg,#FFE680,#FFC93C);}
+.cell{display:flex;flex-direction:column}
