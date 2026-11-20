@@ -1,0 +1,35 @@
+/* ---------- escenario ---------- */
+.hero{position:relative;overflow:hidden;transition:background .8s;
+  background:radial-gradient(circle at 70% 45%,color-mix(in srgb,var(--tc) 80%,#fff) 0,color-mix(in srgb,var(--tc) 65%,#1D1D2B) 72%)}
+.hero::before{content:"";position:absolute;inset:-60%;background:repeating-conic-gradient(from 0deg at 70% 45%,rgba(255,255,255,.08) 0 6deg,transparent 6deg 18deg);animation:spin 70s linear infinite;pointer-events:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hwrap{position:relative;max-width:1120px;margin:0 auto;padding:46px clamp(16px,4vw,40px) 60px;display:grid;grid-template-columns:1fr 420px;gap:50px;align-items:center;min-height:620px}
+.copy{color:#fff}
+.k{display:inline-block;background:#fff;color:var(--ink);font-weight:900;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:99px;border:3px solid var(--ink)}
+h1{font-family:'Lilita One';font-weight:400;font-size:clamp(42px,6vw,76px);line-height:.95;margin-top:16px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill;text-shadow:0 6px 0 var(--ink)}
+h1 span{color:var(--yellow)}
+.lead{font-weight:800;font-size:18px;margin-top:16px;max-width:470px;text-shadow:0 2px 0 rgba(0,0,0,.25)}
+.form{display:flex;margin-top:24px;background:#fff;border:4px solid var(--ink);border-radius:99px;box-shadow:0 6px 0 var(--ink);overflow:hidden;max-width:500px}
+.form span{padding-left:18px;font-weight:800;color:#8a8275;align-self:center}
+.form input{flex:1;min-width:0;border:0;outline:0;font:900 19px Nunito;padding:14px 6px;color:var(--ink)}
+.form button{background:var(--yellow);font-weight:900;font-size:17px;padding:0 20px;border-left:4px solid var(--ink);white-space:nowrap}
+.form button:hover{background:#FFE14D}
+.form button:disabled{opacity:.6;cursor:wait}
+.hint{font-weight:800;font-size:13px;margin-top:12px;opacity:.85}
+.progress{margin-top:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.dots{display:flex;gap:6px}.dots i{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid var(--ink)}
+.dots i.on{background:var(--yellow)}
+.btn{font-weight:900;font-size:16px;padding:12px 20px;border-radius:14px;border:4px solid var(--ink);box-shadow:0 5px 0 var(--ink);background:var(--yellow);color:var(--ink)}
+.btn.w{background:#fff}.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.acts{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.tally{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.tally div{background:rgba(255,255,255,.95);color:var(--ink);border:3px solid var(--ink);border-radius:12px;padding:6px 12px;font-weight:900;font-size:14px}
+.tally small{display:block;font-size:10px;letter-spacing:1px;opacity:.55;text-transform:uppercase}
+
+.stage{position:relative;width:min(330px,78vw);aspect-ratio:63/88;margin:30px auto 40px;cursor:pointer;user-select:none}
+.toast{position:absolute;left:50%;top:-34px;transform:translateX(-50%);z-index:20;white-space:nowrap;font:900 16px Nunito;background:#fff;border:3px solid var(--ink);border-radius:99px;padding:4px 14px;box-shadow:0 4px 0 var(--ink);animation:pop .4s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{from{transform:translateX(-50%) scale(.3);opacity:0}}
+.stage-step{position:absolute;left:50%;bottom:-38px;transform:translateX(-50%);white-space:nowrap;color:#fff;font-weight:900;font-size:14px;text-shadow:0 2px 0 rgba(0,0,0,.4)}
+.rays{position:absolute;inset:-60%;z-index:0;border-radius:50%;opacity:0;transition:opacity .4s;pointer-events:none;
+  background:repeating-conic-gradient(rgba(255,240,150,.55) 0 8deg,transparent 8deg 20deg);-webkit-mask:radial-gradient(circle,#000 20%,transparent 65%);mask:radial-gradient(circle,#000 20%,transparent 65%);animation:spin 12s linear infinite}
+.stage.glow .rays{opacity:1}
