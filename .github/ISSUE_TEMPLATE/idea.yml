@@ -1,0 +1,14 @@
+name: ✨ Idea
+description: Una carta, una mecánica o una mejora nueva.
+labels: ['tipo: feature']
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: ¿Qué te gustaría?
+    validations:
+      required: true
+  - type: textarea
+    id: por-que
+    attributes:
+      label: ¿Por qué haría Gitmon más divertido?
