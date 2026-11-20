@@ -1,5 +1,5 @@
 import './styles/main.css';
-import { activeSeason } from './config';
+import { activeSeason, editionLabel } from './config';
 import { buildPack } from './core/pack';
 import { fetchGithub } from './data/github';
 import * as pokeapi from './data/pokeapi';
@@ -27,6 +27,7 @@ const trade = createTrade({ build: (login) => build(login) });
 
 startApp({
   season,
+  edition: editionLabel(season),
   defaultLogin: 'FelipeBeltranING',
   build,
   onDone: (pack) => trade.show(pack),
