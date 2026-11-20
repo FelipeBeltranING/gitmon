@@ -1,4 +1,4 @@
-import { typeOfLanguage, type TypeName } from './types';
+import { typeOfLanguage, type TypeName } from './types.js';
 
 /** PS, Ataque, Defensa, At. Esp., Def. Esp., Velocidad (mismo orden que la PokeAPI). */
 export type StatVector = [number, number, number, number, number, number];

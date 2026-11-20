@@ -1,7 +1,7 @@
-import type { Card } from '../core/pack';
-import { RARITY } from '../core/rarity';
-import { typeColor, typeName } from '../core/types';
-import { esc, fmt, pad } from './dom';
+import type { Card } from '../core/pack.js';
+import { RARITY } from '../core/rarity.js';
+import { typeColor, typeName } from '../core/types.js';
+import { esc, fmt, pad } from './dom.js';
 
 const energy = (power: number | ''): string => '<i></i>'.repeat(Math.max(1, Math.min(4, Math.ceil((Number(power) || 20) / 40))));
 

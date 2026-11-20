@@ -1,8 +1,8 @@
-import { FRIENDS_VISIBLE } from '../config';
-import { tradeProposal, type Friend, type Pack } from '../core/pack';
-import { RARITY } from '../core/rarity';
-import { bindTilt, captionHTML, cardHTML } from './card';
-import { $, $$, esc, fmt } from './dom';
+import { FRIENDS_VISIBLE } from '../config.js';
+import { tradeProposal, type Friend, type Pack } from '../core/pack.js';
+import { RARITY } from '../core/rarity.js';
+import { bindTilt, captionHTML, cardHTML } from './card.js';
+import { $, $$, esc, fmt } from './dom.js';
 
 export interface TradeOptions {
   build(login: string): Promise<Pack>;

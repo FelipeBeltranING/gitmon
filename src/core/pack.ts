@@ -1,8 +1,8 @@
-import { buildPool, pickBest, sample, type Candidate } from './choose';
-import { companionRarity, packPower, repoRarity, RARITY, type Rarity } from './rarity';
-import { isShinySeed, mulberry32, seedOf } from './rng';
-import { byStars, mostActive, profileSignals, repoVector, total, type GhEvent, type GhProfile, type GhRepo } from './stats';
-import { typeName, typeOfLanguage, type TypeName } from './types';
+import { buildPool, pickBest, sample, type Candidate } from './choose.js';
+import { companionRarity, packPower, repoRarity, RARITY, type Rarity } from './rarity.js';
+import { isShinySeed, mulberry32, seedOf } from './rng.js';
+import { byStars, mostActive, profileSignals, repoVector, total, type GhEvent, type GhProfile, type GhRepo, type ProfileSignals } from './stats.js';
+import { typeName, typeOfLanguage, type TypeName } from './types.js';
 
 export const PACK_REPOS = 5;
 
@@ -100,19 +100,16 @@ async function choose<P extends Candidate>(
   return best;
 }
 
-export async function buildPack<P extends Candidate>(
+/** El compañero: la carta que sale de todo el perfil. */
+async function companionOf<P extends Candidate>(
+  gh: GithubData,
   login: string,
   season: string,
   deps: PackDeps<P>,
-  onStep: (text: string) => void = () => {},
-): Promise<Pack> {
-  onStep('Buscando al entrenador…');
-  const gh = await deps.github(login);
-  const now = deps.now();
+  used: Set<number>,
+  now: number,
+): Promise<{ companion: Card; signals: ProfileSignals }> {
   const signals = profileSignals(gh.profile, gh.repos, gh.events, now, mulberry32(seedOf(season, login)));
-  const used = new Set<number>();
-
-  onStep('Imprimiendo carta 1 · tu compañero');
   const companionSeed = seedOf(season, login);
   const mon = await choose(deps, {
     primary: signals.primary,
@@ -139,6 +136,32 @@ export async function buildPack<P extends Candidate>(
     attacks: byStars(signals.repos).slice(0, 2).map(repoAttack),
     why: `${signals.languages[0] ?? '—'} → ${typeName(signals.primary)}${signals.secondary ? ` · ${secondReason} → ${typeName(signals.secondary)}` : ''}`,
   };
+  return { companion, signals };
+}
+
+/** Solo el compañero (para la tarjeta del README y la imagen para redes): muchas menos peticiones que el sobre. */
+export async function buildCompanion<P extends Candidate>(
+  login: string,
+  season: string,
+  deps: PackDeps<P>,
+): Promise<{ companion: Card; avatar: string; source: GithubData['source'] }> {
+  const gh = await deps.github(login);
+  const { companion } = await companionOf(gh, login, season, deps, new Set<number>(), deps.now());
+  return { companion, avatar: gh.profile.avatar_url, source: gh.source };
+}
+
+export async function buildPack<P extends Candidate>(
+  login: string,
+  season: string,
+  deps: PackDeps<P>,
+  onStep: (text: string) => void = () => {},
+): Promise<Pack> {
+  onStep('Buscando al entrenador…');
+  const gh = await deps.github(login);
+  const now = deps.now();
+  const used = new Set<number>();
+  onStep('Imprimiendo carta 1 · tu compañero');
+  const { companion, signals } = await companionOf(gh, login, season, deps, used, now);
 
   const cards: Card[] = [];
   const active = mostActive(signals.repos, now, PACK_REPOS);

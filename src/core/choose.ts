@@ -1,4 +1,4 @@
-import type { StatVector } from './stats';
+import type { StatVector } from './stats.js';
 
 /** Lo mínimo que necesitamos de un Pokémon para compararlo. */
 export interface Candidate {
