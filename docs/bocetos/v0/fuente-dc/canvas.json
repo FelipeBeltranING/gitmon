@@ -1,0 +1,20 @@
+{
+  "v": 3,
+  "createdOnFiles": { "v": 1, "at": "2026-11-20T01:50:00Z" },
+  "title": "Gitmon — boceto y maqueta inicial",
+  "launch": { "view": "canvas" },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": { "x": 0, "y": 1440, "w": 1440, "h": 4300, "title": "Maqueta · landing interactiva", "expand": "fill", "is_interactive": true },
+    "Boceto.dc.html": { "x": 0, "y": 0, "w": 2400, "h": 1000, "title": "Boceto · flujo de pantallas" },
+    "Sistema.dc.html": { "x": 1520, "y": 1440, "w": 1440, "h": 1180, "title": "Sistema · cómo se calcula tu Pokémon" },
+    "Tarjeta.dc.html": { "x": 1520, "y": 2740, "w": 1200, "h": 640, "title": "Tarjeta para README" }
+  },
+  "order": ["Main.dc.html", "Boceto.dc.html", "Sistema.dc.html", "Tarjeta.dc.html"],
+  "notes": {
+    "titleBoceto": { "x": 0, "y": -300, "text": "Boceto · el flujo", "kind": "title1", "maxW": 2400 },
+    "titleMaqueta": { "x": 0, "y": 1140, "text": "Maqueta v0 · Gitmon", "kind": "title1", "maxW": 2960 },
+    "stickyDemo": { "x": -520, "y": 1440, "w": 440, "text": "Dale Play a la maqueta y escribe cualquier usuario: la hierba cambia mientras escribes y el resultado sale de un hash del nombre (datos simulados). Los recuadros punteados son donde irán los sprites de PokeAPI.", "fill": "teal", "size": "m" }
+  },
+  "designSystems": []
+}

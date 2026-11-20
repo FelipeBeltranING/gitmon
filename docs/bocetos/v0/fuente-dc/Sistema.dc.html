@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Gitmon — sistema de cálculo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&amp;family=Silkscreen&amp;family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FFD23F}a:hover{color:#FFE58A}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1180px; box-sizing: border-box; padding: 56px; background: #0B1210; color: #E8F0EA; font-family: 'Space Grotesk', sans-serif; display: flex; flex-direction: column; gap: 32px">
+
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: Silkscreen, monospace; font-size: 13px; letter-spacing: 0.08em; color: #6FDB7A">RECETA DEL ALGORITMO · V0</span>
+<h1 style="margin: 0; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 52px; line-height: 1">Cómo se calcula tu Pokémon</h1>
+</div>
+<p style="margin: 0; max-width: 460px; font-size: 16px; line-height: 1.5; color: #A9BDB1">Todo es determinista: el mismo perfil siempre da el mismo Pokémon, y cambia solo cuando cambia tu actividad.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; flex: 1">
+
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.06em; color: #6FDB7A">1 · TIPO</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #C9D8CF"><strong style="color: #E8F0EA">Primario</strong> = lenguaje con más bytes en tus repos (sin forks). <strong style="color: #E8F0EA">Secundario</strong> = el segundo lenguaje, o <strong style="color: #E8F0EA">Siniestro</strong> si tu hora pico cae entre 22:00 y 05:00.</p>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px">
+<sc-for list="{{langs}}" as="l" hint-placeholder-count="15">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 6px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px">{{l.lang}}</span><span style="font-family: Silkscreen, monospace; font-size: 10px; padding: 3px 8px; border-radius: 999px; background: {{l.bg}}; color: {{l.fg}}">{{l.label}}</span></div>
+</sc-for>
+</div>
+</div>
+
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.06em; color: #6FDB7A">2 · SEIS ESTADÍSTICAS</span>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{stats}}" as="s" hint-placeholder-count="6">
+<div style="display: grid; grid-template-columns: 86px minmax(0, 1fr) 54px; gap: 10px; align-items: baseline; padding-bottom: 8px; border-bottom: 1px solid #1C2B23"><span style="font-weight: 700; font-size: 15px">{{s.k}}</span><span style="font-size: 14px; color: #C9D8CF">{{s.src}}</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7F978A; text-align: right">máx {{s.max}}</span></div>
+</sc-for>
+</div>
+<div style="background: #060B09; border: 2px solid #22362B; border-radius: 12px; padding: 14px; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; color: #6FDB7A">stat = 10 + 150 · (ln(1+x) / ln(1+máx))<sup>2.4</sup></div>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #A9BDB1">Ejemplo: 1 300 commits → ln(1301)/ln(3001) = 0.896 → 0.896<sup>2.4</sup> = 0.767 → <strong style="color: #E8F0EA">Ataque 125</strong>. El logaritmo evita que los perfiles gigantes aplasten a todos; el exponente separa a los del medio.</p>
+</div>
+
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<span style="font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.06em; color: #6FDB7A">3 · ETAPA POR TOTAL BASE</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #C9D8CF">Suma de las 6 stats (rango 60–960). Decide si sales como básico, evolucionado o legendario.</p>
+<div style="display: flex; height: 44px; border-radius: 10px; overflow: hidden; border: 2px solid #22362B">
+<div style="width: 40%; background: #1F5133; display: flex; align-items: center; justify-content: center; font-family: Silkscreen, monospace; font-size: 11px">BÁSICO</div>
+<div style="width: 13.3%; background: #2E7D46; display: flex; align-items: center; justify-content: center; font-family: Silkscreen, monospace; font-size: 11px">F1</div>
+<div style="width: 16.7%; background: #45A85B; color: #0B1210; display: flex; align-items: center; justify-content: center; font-family: Silkscreen, monospace; font-size: 11px">FINAL</div>
+<div style="width: 30%; background: #FFD23F; color: #0B1210; display: flex; align-items: center; justify-content: center; font-family: Silkscreen, monospace; font-size: 11px">LEGENDARIO</div>
+</div>
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #7F978A"><span>60</span><span style="padding-left: 40px">420</span><span>540</span><span>690</span><span>960</span></div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="background: #0B1210; border-radius: 10px; padding: 12px"><span style="display: block; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 26px">13%</span><span style="font-size: 13px; color: #A9BDB1">básico</span></div>
+<div style="background: #0B1210; border-radius: 10px; padding: 12px"><span style="display: block; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 26px">44%</span><span style="font-size: 13px; color: #A9BDB1">fase 1</span></div>
+<div style="background: #0B1210; border-radius: 10px; padding: 12px"><span style="display: block; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 26px">39%</span><span style="font-size: 13px; color: #A9BDB1">fase final</span></div>
+<div style="background: #0B1210; border-radius: 10px; padding: 12px"><span style="display: block; font-family: 'Pixelify Sans', sans-serif; font-weight: 700; font-size: 26px; color: #FFD23F">3%</span><span style="font-size: 13px; color: #A9BDB1">legendario</span></div>
+</div>
+<p style="margin: 0; font-size: 13px; color: #7F978A">Reparto medido con 2 000 perfiles simulados del generador de la maqueta. Recalibrar con perfiles reales.</p>
+</div>
+
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.06em; color: #6FDB7A">4 · ELECCIÓN FINAL</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #C9D8CF"><strong style="color: #E8F0EA">Candidatos</strong> = Pokémon de tu tipo primario (y secundario, si lo tienes) dentro de tu etapa, sacados de PokeAPI.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #C9D8CF"><strong style="color: #E8F0EA">Ganador</strong> = el de mayor similitud coseno entre tu vector de 6 stats y el suyo.</p>
+<div style="background: #060B09; border: 2px solid #22362B; border-radius: 12px; padding: 14px; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; color: #6FDB7A">sim(a, b) = a·b / (|a| · |b|)</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #A9BDB1">Compara la forma, no el tamaño: si tienes mucho Ataque y poca Def. Esp., caes en un Pokémon con ese mismo perfil, sin importar si tus números son grandes o pequeños.</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #A9BDB1">Equipo de 6: lo mismo, pero repo por repo, sin repetir Pokémon.</p>
+</div>
+
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.06em; color: #6FDB7A">5 · DETALLES</span>
+<sc-for list="{{extras}}" as="e" hint-placeholder-count="5">
+<div style="display: flex; flex-direction: column; gap: 3px; padding-bottom: 10px; border-bottom: 1px solid #1C2B23"><span style="font-weight: 700; font-size: 15px">{{e.k}}</span><span style="font-size: 14px; line-height: 1.45; color: #A9BDB1">{{e.v}}</span></div>
+</sc-for>
+</div>
+
+<div style="background: #111C17; border: 2px solid #22362B; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: Silkscreen, monospace; font-size: 12px; letter-spacing: 0.06em; color: #6FDB7A">6 · DE DÓNDE SALEN LOS DATOS</span>
+<sc-for list="{{sources}}" as="s" hint-placeholder-count="6">
+<div style="display: flex; flex-direction: column; gap: 3px"><code style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #6FDB7A; overflow-wrap: anywhere">{{s.ep}}</code><span style="font-size: 13px; color: #A9BDB1">{{s.what}}</span></div>
+</sc-for>
+<p style="margin: 6px 0 0; font-size: 13px; line-height: 1.5; color: #7F978A">Sin token, GitHub da 60 peticiones por hora: hace falta una función serverless con token y caché de 24 h por usuario.</p>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const T = {
+      Normal: ['#A8A77A', '#141414'], Fuego: ['#EE8130', '#141414'], Agua: ['#6390F0', '#141414'], 'Eléctrico': ['#F7D02C', '#141414'],
+      Planta: ['#7AC74C', '#141414'], Hielo: ['#96D9D6', '#141414'], Lucha: ['#C22E28', '#FFFFFF'], Veneno: ['#A33EA1', '#FFFFFF'],
+      Tierra: ['#E2BF65', '#141414'], Volador: ['#A98FF3', '#141414'], 'Psíquico': ['#F95587', '#141414'], Fantasma: ['#735797', '#FFFFFF'],
+      'Dragón': ['#6F35FC', '#FFFFFF'], Acero: ['#B7B7CE', '#141414'], Hada: ['#D685AD', '#141414']
+    };
+    const pairs = [
+      ['JavaScript', 'Eléctrico'], ['TypeScript', 'Psíquico'], ['Python', 'Veneno'], ['Java', 'Fuego'], ['C / C++', 'Lucha'],
+      ['Rust', 'Acero'], ['Go', 'Agua'], ['Swift', 'Volador'], ['Kotlin', 'Planta'], ['Ruby', 'Hada'], ['PHP', 'Fantasma'],
+      ['GDScript', 'Dragón'], ['Shell', 'Tierra'], ['Lua', 'Hielo'], ['HTML / CSS', 'Normal']
+    ];
+    return {
+      langs: pairs.map((p) => ({ lang: p[0], label: p[1], bg: T[p[1]][0], fg: T[p[1]][1] })),
+      stats: [
+        { k: 'PS', src: 'repos × años de cuenta', max: '600' },
+        { k: 'Ataque', src: 'commits del último año', max: '3000' },
+        { k: 'Defensa', src: 'PRs fusionados', max: '250' },
+        { k: 'At. Esp.', src: 'estrellas totales recibidas', max: '1500' },
+        { k: 'Def. Esp.', src: 'seguidores', max: '600' },
+        { k: 'Velocidad', src: 'racha más larga (días)', max: '150' }
+      ],
+      extras: [
+        { k: 'Naturaleza', v: 'Por tu hora pico de commits: 05–11 Activa · 11–17 Seria · 17–22 Alegre · 22–05 Osada.' },
+        { k: 'Nivel', v: '5 + commits del año ÷ 28, con tope en 100.' },
+        { k: 'Habilidad', v: 'El nombre de tu repo con más estrellas.' },
+        { k: 'Movimientos', v: 'Tus 4 repos top. Tipo = su lenguaje. Potencia = 30 + 6·√estrellas, redondeada a 5, máx. 150.' },
+        { k: 'Variocolor', v: 'hash(id de usuario) mod 4096 = 0, la misma probabilidad de 1 entre 4096 que en los juegos actuales.' }
+      ],
+      sources: [
+        { ep: 'GET /users/{user}', what: 'antigüedad, seguidores, repos públicos' },
+        { ep: 'GET /users/{user}/repos?per_page=100', what: 'lenguaje y tamaño de cada repo, estrellas' },
+        { ep: 'GET /users/{user}/events/public', what: 'horas de tus commits (últimos 90 días)' },
+        { ep: 'GraphQL contributionsCollection', what: 'commits del año y racha (requiere token)' },
+        { ep: 'GET pokeapi.co/api/v2/type/{tipo}', what: 'candidatos de cada tipo' },
+        { ep: 'GET pokeapi.co/api/v2/pokemon/{id}', what: 'stats base y sprites oficiales' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Gitmon — boceto del flujo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>x-dc{display:none}</style>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#2B2B2B}a:hover{color:#000}
+.hatch{background-image:repeating-linear-gradient(45deg,rgba(43,43,43,.22) 0 2px,transparent 2px 9px)}
+</style>
+</helmet>
+<div style="width: 2400px; height: 1000px; box-sizing: border-box; padding: 52px 64px; background: #F5F1E8; color: #2B2B2B; font-family: Kalam, cursive; display: flex; flex-direction: column; gap: 30px">
+
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-weight: 700; font-size: 54px; line-height: 1">Gitmon · boceto del flujo</h1>
+<p style="margin: 0; font-size: 22px; color: #4A4A4A">v0 · de escribir tu usuario a pegar tu tarjeta en el README</p>
+</div>
+<div style="width: 600px; background: #FFE58A; padding: 18px 22px; transform: rotate(1.2deg); box-shadow: 3px 4px 0 rgba(43, 43, 43, 0.18); font-size: 20px; line-height: 1.35">
+<strong>Decisión abierta:</strong> ¿te digo qué Pokémon eres o te armo el equipo?<br><strong>Propuesta → los dos.</strong> Compañero = tu perfil entero. Equipo = tus 6 repos más activos. Un toggle los cambia sin volver a escanear.
+</div>
+</div>
+
+<div style="display: flex; align-items: flex-start">
+
+<div style="width: 380px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-weight: 700; font-size: 26px">1 · Entrada</span>
+<div style="height: 560px; box-sizing: border-box; background: #FFFDF8; border: 2.5px solid #2B2B2B; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 14px; transform: rotate(-0.4deg)">
+<div style="display: flex; justify-content: space-between; align-items: center"><div style="display: flex; align-items: center; gap: 8px"><div class="hatch" style="width: 22px; height: 22px; border: 2px solid #2B2B2B"></div><span style="font-weight: 700; font-size: 18px">GITMON</span></div><div style="display: flex; gap: 8px"><div style="width: 34px; height: 6px; background: rgba(43, 43, 43, 0.3); border-radius: 3px"></div><div style="width: 34px; height: 6px; background: rgba(43, 43, 43, 0.3); border-radius: 3px"></div><div style="width: 34px; height: 6px; background: rgba(43, 43, 43, 0.3); border-radius: 3px"></div></div></div>
+<span style="font-weight: 700; font-size: 25px; line-height: 1.1">¿Qué Pokémon se esconde en tus commits?</span>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="height: 7px; width: 95%; background: rgba(43, 43, 43, 0.22); border-radius: 4px"></div><div style="height: 7px; width: 85%; background: rgba(43, 43, 43, 0.22); border-radius: 4px"></div><div style="height: 7px; width: 60%; background: rgba(43, 43, 43, 0.22); border-radius: 4px"></div></div>
+<div style="display: flex; gap: 8px"><div style="flex: 1; border: 2px solid #2B2B2B; border-radius: 8px; padding: 6px 10px; font-size: 16px">github.com/ ______</div><div style="background: #2B2B2B; color: #FFFDF8; border-radius: 8px; padding: 6px 12px; font-size: 16px; font-weight: 700">Escanear</div></div>
+<div style="display: flex; gap: 8px; font-size: 15px"><span style="background: #2B2B2B; color: #FFFDF8; border-radius: 999px; padding: 2px 12px">1 compañero</span><span style="border: 2px solid #2B2B2B; border-radius: 999px; padding: 0 12px">Equipo de 6</span></div>
+<div style="border: 2px solid #2B2B2B; border-radius: 10px; padding: 10px; display: grid; grid-template-rows: repeat(7, minmax(0, 1fr)); grid-auto-flow: column; gap: 3px; margin-top: auto">
+<sc-for list="{{grassSmall}}" as="c" hint-placeholder-count="112"><div class="{{c.cls}}" style="aspect-ratio: 1 / 1; border: 1.5px solid #2B2B2B; border-radius: 2px"></div></sc-for>
+</div>
+<span style="font-size: 15px; text-align: center; color: #4A4A4A">↑ tu gráfica de contribuciones = la hierba alta</span>
+</div>
+<p style="margin: 6px 0 0; font-size: 19px; line-height: 1.35; color: #3A3A3A">La hierba cambia mientras escribes: cada usuario tiene la suya. Engancha antes de dar clic.</p>
+</div>
+
+<div style="width: 70px; height: 600px; display: flex; align-items: center; justify-content: center"><svg width="64" height="40" viewBox="0 0 64 40" fill="none" stroke="#2B2B2B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 24C18 14 34 30 58 20"></path><path d="M47 12l11 8-12 6"></path></svg></div>
+
+<div style="width: 380px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-weight: 700; font-size: 26px">2 · Escaneo</span>
+<div style="height: 560px; box-sizing: border-box; background: #FFFDF8; border: 2.5px solid #2B2B2B; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 16px; transform: rotate(0.5deg)">
+<span style="font-size: 17px; color: #4A4A4A">la hierba se mueve en ola →</span>
+<div style="position: relative; display: grid; grid-template-rows: repeat(7, minmax(0, 1fr)); grid-auto-flow: column; gap: 4px">
+<sc-for list="{{grassBig}}" as="c" hint-placeholder-count="98"><div class="{{c.cls}}" style="aspect-ratio: 1 / 1; border: 1.5px solid #2B2B2B; border-radius: 3px"></div></sc-for>
+<div style="position: absolute; top: -10px; bottom: -10px; left: 58%; width: 4px; background: #2B2B2B; border-radius: 2px"></div>
+<div style="position: absolute; left: 70%; top: 18%; transform: translate(-50%, -100%); width: 40px; height: 40px; background: #FFE58A; border: 2.5px solid #2B2B2B; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 26px">!</div>
+</div>
+<div style="height: 10px; border: 2px solid #2B2B2B; border-radius: 6px; overflow: hidden"><div class="hatch" style="width: 64%; height: 100%"></div></div>
+<div style="border: 3px solid #2B2B2B; border-radius: 10px; padding: 14px; font-size: 20px; line-height: 1.3; margin-top: auto">Buscando en 365 días de commits de @tu-usuario… ▼</div>
+<span style="font-size: 15px; color: #4A4A4A">caja de diálogo estilo juego retro</span>
+</div>
+<p style="margin: 6px 0 0; font-size: 19px; line-height: 1.35; color: #3A3A3A">2–3 s de animación. Tapa las llamadas a GitHub y PokeAPI sin que se sienta como “cargando”.</p>
+</div>
+
+<div style="width: 70px; height: 600px; display: flex; align-items: center; justify-content: center"><svg width="64" height="40" viewBox="0 0 64 40" fill="none" stroke="#2B2B2B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18C20 28 36 12 58 22"></path><path d="M46 14l12 8-12 6"></path></svg></div>
+
+<div style="width: 380px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-weight: 700; font-size: 26px">3a · Tu compañero</span>
+<div style="height: 560px; box-sizing: border-box; background: #FFFDF8; border: 2.5px solid #2B2B2B; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 12px; transform: rotate(-0.3deg)">
+<div class="hatch" style="border: 2px solid #2B2B2B; border-radius: 10px; padding: 8px 12px; display: flex; justify-content: space-between; font-weight: 700; font-size: 20px"><span>NOMBRE</span><span>#0000 · Nv. 42</span></div>
+<div style="position: relative; height: 170px; border: 2px solid #2B2B2B; border-radius: 10px"><svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; inset: 0"><path d="M0 0L100 100M100 0L0 100" stroke="#2B2B2B" stroke-width="0.8" vector-effect="non-scaling-stroke"></path></svg><span style="position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); background: #FFFDF8; padding: 0 8px; font-size: 15px">sprite PokeAPI</span></div>
+<div style="display: flex; gap: 8px; font-size: 15px"><span style="border: 2px solid #2B2B2B; border-radius: 999px; padding: 0 12px">Tipo 1</span><span style="border: 2px solid #2B2B2B; border-radius: 999px; padding: 0 12px">Tipo 2</span></div>
+<sc-for list="{{bars}}" as="b" hint-placeholder-count="6"><div style="display: grid; grid-template-columns: 74px minmax(0, 1fr); align-items: center; gap: 8px; font-size: 15px"><span>{{b.k}}</span><div style="height: 9px; border: 1.5px solid #2B2B2B; border-radius: 5px; overflow: hidden"><div class="hatch" style="height: 100%; {{b.w}}"></div></div></div></sc-for>
+<span style="font-size: 15px; color: #4A4A4A">← cada stat dice de dónde sale (“34 repos × 6 años”)</span>
+<div style="display: flex; flex-direction: column; gap: 6px; margin-top: auto"><div style="height: 22px; border: 1.5px solid #2B2B2B; border-radius: 6px"></div><div style="height: 22px; border: 1.5px solid #2B2B2B; border-radius: 6px"></div></div>
+</div>
+<p style="margin: 6px 0 0; font-size: 19px; line-height: 1.35; color: #3A3A3A">Mostrar el porqué (“Python → Veneno”) es lo que hace que la gente lo comparta y discuta.</p>
+</div>
+
+<div style="width: 70px; height: 600px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px"><svg width="60" height="44" viewBox="0 0 60 44" fill="none" stroke="#2B2B2B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14h48M44 6l10 8-10 8M54 30H6M16 22 6 30l10 8"></path></svg><span style="font-size: 16px; font-weight: 700">toggle</span></div>
+
+<div style="width: 380px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-weight: 700; font-size: 26px">3b · Tu equipo</span>
+<div style="height: 560px; box-sizing: border-box; background: #FFFDF8; border: 2.5px solid #2B2B2B; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 14px; transform: rotate(0.4deg)">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<sc-for list="{{slots}}" as="s" hint-placeholder-count="6">
+<div style="border: 2px solid #2B2B2B; border-radius: 10px; padding: 8px; display: flex; flex-direction: column; gap: 6px">
+<div style="position: relative; height: 70px; border: 1.5px solid #2B2B2B; border-radius: 6px"><svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; inset: 0"><path d="M0 0L100 100M100 0L0 100" stroke="#2B2B2B" stroke-width="0.8" vector-effect="non-scaling-stroke"></path></svg></div>
+<span style="font-size: 15px; font-weight: 700">{{s.n}}</span>
+<span style="font-size: 13px; color: #4A4A4A">de {{s.repo}}</span>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; gap: 8px; font-size: 15px; margin-top: auto"><span style="border: 2px solid #2B2B2B; border-radius: 8px; padding: 2px 8px">Cobertura 4/18</span><span style="border: 2px solid #2B2B2B; border-radius: 8px; padding: 2px 8px">Variedad 67%</span></div>
+</div>
+<p style="margin: 6px 0 0; font-size: 19px; line-height: 1.35; color: #3A3A3A">Cada repo es un Pokémon: lenguaje → tipo, estrellas → etapa. Sin repetir el mismo dos veces.</p>
+</div>
+
+<div style="width: 70px; height: 600px; display: flex; align-items: center; justify-content: center"><svg width="64" height="40" viewBox="0 0 64 40" fill="none" stroke="#2B2B2B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 24C18 14 34 30 58 20"></path><path d="M47 12l11 8-12 6"></path></svg></div>
+
+<div style="width: 380px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-weight: 700; font-size: 26px">4 · Compartir</span>
+<div style="height: 560px; box-sizing: border-box; background: #FFFDF8; border: 2.5px solid #2B2B2B; border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 14px; transform: rotate(-0.5deg)">
+<span style="font-size: 15px; color: #4A4A4A">tu README en GitHub</span>
+<span style="font-weight: 700; font-size: 22px"># Hola, soy …</span>
+<div style="display: flex; flex-direction: column; gap: 7px"><div style="height: 7px; width: 90%; background: rgba(43, 43, 43, 0.22); border-radius: 4px"></div><div style="height: 7px; width: 70%; background: rgba(43, 43, 43, 0.22); border-radius: 4px"></div></div>
+<div style="border: 2.5px solid #2B2B2B; border-radius: 10px; padding: 10px; display: flex; gap: 10px">
+<div style="position: relative; width: 84px; height: 84px; flex: 0 0 84px; border: 1.5px solid #2B2B2B; border-radius: 6px"><svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; inset: 0"><path d="M0 0L100 100M100 0L0 100" stroke="#2B2B2B" stroke-width="0.8" vector-effect="non-scaling-stroke"></path></svg></div>
+<div style="flex: 1; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700; font-size: 17px">NOMBRE · Nv. 42</span><div class="hatch" style="height: 8px; width: 80%; border: 1.5px solid #2B2B2B; border-radius: 4px"></div><div class="hatch" style="height: 8px; width: 55%; border: 1.5px solid #2B2B2B; border-radius: 4px"></div><div class="hatch" style="height: 8px; width: 68%; border: 1.5px solid #2B2B2B; border-radius: 4px"></div></div>
+</div>
+<span style="font-size: 15px; color: #4A4A4A">tarjeta SVG 495×195, se actualiza a diario</span>
+<div style="border: 2px dashed #2B2B2B; border-radius: 8px; padding: 8px 10px; font-size: 15px; overflow-wrap: anywhere">![gitmon](…/api/card?user=tu-usuario)</div>
+<div style="display: flex; gap: 8px; margin-top: auto; font-size: 15px"><span style="background: #2B2B2B; color: #FFFDF8; border-radius: 8px; padding: 4px 12px; font-weight: 700">Copiar Markdown</span><span style="border: 2px solid #2B2B2B; border-radius: 8px; padding: 2px 12px">Descargar PNG</span></div>
+</div>
+<p style="margin: 6px 0 0; font-size: 19px; line-height: 1.35; color: #3A3A3A">El motor de crecimiento: cada README con la tarjeta trae visitas. Mismo truco que GitFarm: un SVG servido por una API.</p>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":2400,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const mk = (n, seed) => {
+      const out = [];
+      let s = seed;
+      for (let i = 0; i < n; i++) {
+        s = (s * 9301 + 49297) % 233280;
+        out.push({ cls: s / 233280 > 0.62 ? 'hatch' : '' });
+      }
+      return out;
+    };
+    return {
+      grassSmall: mk(112, 7),
+      grassBig: mk(98, 19),
+      bars: [
+        { k: 'PS', w: 'width: 70%' }, { k: 'Ataque', w: 'width: 85%' }, { k: 'Defensa', w: 'width: 40%' },
+        { k: 'At. Esp.', w: 'width: 62%' }, { k: 'Def. Esp.', w: 'width: 50%' }, { k: 'Velocidad', w: 'width: 33%' }
+      ],
+      slots: [
+        { n: 'Pokémon 1', repo: 'repo-top' }, { n: 'Pokémon 2', repo: 'repo-2' }, { n: 'Pokémon 3', repo: 'repo-3' },
+        { n: 'Pokémon 4', repo: 'repo-4' }, { n: 'Pokémon 5', repo: 'repo-5' }, { n: 'Pokémon 6', repo: 'repo-6' }
+      ]
+    };
+  }
+}
+</script>
+<script>
+// dc-lite: renderizador mínimo para ver los artboards .dc.html fuera del canvas original.
+// Soporta {{holes}}, <sc-for>, <sc-if>, eventos onX, <helmet> y una clase Component extends DCLogic.
+(function () {
+  function DCLogic(props) { this.props = props || {}; this.state = {}; }
+  DCLogic.prototype.setState = function (p) {
+    var patch = typeof p === 'function' ? p(this.state, this.props) : p;
+    this.state = Object.assign({}, this.state, patch);
+    if (this.__render) this.__render();
+  };
+  DCLogic.prototype.forceUpdate = function () { if (this.__render) this.__render(); };
+  window.DCLogic = DCLogic;
+
+  var HOLE = /\{\{\s*([^}]+?)\s*\}\}/g;
+  var WHOLE = /^\s*\{\{\s*([^}]+?)\s*\}\}\s*$/;
+
+  function lookup(path, scopes) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (path === 'null') return null;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+    if (/^(['"]).*\1$/.test(path)) return path.slice(1, -1);
+    var parts = path.split('.');
+    for (var i = scopes.length - 1; i >= 0; i--) {
+      if (scopes[i] && Object.prototype.hasOwnProperty.call(scopes[i], parts[0])) {
+        var v = scopes[i][parts[0]];
+        for (var j = 1; j < parts.length; j++) v = v == null ? undefined : v[parts[j]];
+        return v;
+      }
+    }
+    return undefined;
+  }
+  function interp(str, scopes) {
+    return str.replace(HOLE, function (_, p) { var v = lookup(p, scopes); return v == null ? '' : String(v); });
+  }
+
+  var EVENTS = { onclick: 'click', onsubmit: 'submit', oninput: 'input', onkeydown: 'keydown', onfocus: 'focus', onblur: 'blur', onmouseenter: 'mouseenter', onmouseleave: 'mouseleave' };
+
+  function processAttrs(el, scopes) {
+    var attrs = Array.prototype.slice.call(el.attributes);
+    attrs.forEach(function (a) {
+      if (a.value.indexOf('{{') === -1) return;
+      var name = a.name.toLowerCase();
+      var m = a.value.match(WHOLE);
+      if (m) {
+        var v = lookup(m[1], scopes);
+        if (name.indexOf('on') === 0) {
+          el.removeAttribute(a.name);
+          var ev = name === 'onchange' ? (/^(INPUT|TEXTAREA)$/.test(el.tagName) ? 'input' : 'change') : (EVENTS[name] || name.slice(2));
+          if (typeof v === 'function') el.addEventListener(ev, v);
+          return;
+        }
+        if (name === 'ref') { el.removeAttribute(a.name); if (typeof v === 'function') v(el); else if (v && typeof v === 'object') v.current = el; return; }
+        if (v === false || v == null) {
+          if (name.indexOf('aria-') === 0) el.setAttribute(a.name, 'false'); else el.removeAttribute(a.name);
+          return;
+        }
+        if (v === true) { el.setAttribute(a.name, name.indexOf('aria-') === 0 ? 'true' : ''); return; }
+        el.setAttribute(a.name, String(v));
+        return;
+      }
+      el.setAttribute(a.name, interp(a.value, scopes));
+    });
+  }
+
+  function processChildren(parent, scopes) {
+    var kids = Array.prototype.slice.call(parent.childNodes);
+    kids.forEach(function (n) { processNode(n, scopes); });
+  }
+
+  function processNode(node, scopes) {
+    if (node.nodeType === 3) {
+      if (node.nodeValue.indexOf('{{') !== -1) node.nodeValue = interp(node.nodeValue, scopes);
+      return;
+    }
+    if (node.nodeType !== 1) return;
+    var tag = node.tagName.toLowerCase();
+    if (tag === 'sc-if') {
+      var val = lookup((node.getAttribute('value') || '').replace(/[{}]/g, ''), scopes);
+      var frag = document.createDocumentFragment();
+      if (val) {
+        while (node.firstChild) frag.appendChild(node.firstChild);
+        processChildren(frag, scopes);
+      }
+      node.parentNode.replaceChild(frag, node);
+      return;
+    }
+    if (tag === 'sc-for') {
+      var list = lookup((node.getAttribute('list') || '').replace(/[{}]/g, ''), scopes) || [];
+      var as = node.getAttribute('as') || 'item';
+      var out = document.createDocumentFragment();
+      list.forEach(function (item, i) {
+        var f = document.createDocumentFragment();
+        Array.prototype.forEach.call(node.childNodes, function (c) { f.appendChild(c.cloneNode(true)); });
+        var s = {}; s[as] = item; s.$index = i;
+        processChildren(f, scopes.concat([s]));
+        out.appendChild(f);
+      });
+      node.parentNode.replaceChild(out, node);
+      return;
+    }
+    processAttrs(node, scopes);
+    if (tag === 'template') return;
+    processChildren(node, scopes);
+  }
+
+  function mount() {
+    var host = document.querySelector('x-dc');
+    if (!host) return;
+    var helmet = host.querySelector('helmet');
+    if (helmet) {
+      Array.prototype.slice.call(helmet.children).forEach(function (c) { document.head.appendChild(c); });
+      helmet.parentNode.removeChild(helmet);
+    }
+    var tpl = document.createElement('template');
+    tpl.innerHTML = host.innerHTML;
+    host.innerHTML = '';
+    host.style.display = 'block';
+
+    var script = document.querySelector('script[data-dc-script]');
+    var props = {};
+    try {
+      var decl = JSON.parse(script.getAttribute('data-props') || '{}');
+      Object.keys(decl).forEach(function (k) { if (k[0] !== '$' && decl[k] && 'default' in decl[k]) props[k] = decl[k].default; });
+    } catch (e) {}
+    var Component = new Function('DCLogic', script.textContent + '\n;return Component;')(DCLogic);
+    var comp = new Component(props);
+    if (!comp.state) comp.state = {};
+
+    var queued = false;
+    function render() {
+      var active = document.activeElement;
+      var activeId = active && active.id;
+      var selStart = null, selEnd = null;
+      try { if (activeId && active.selectionStart != null) { selStart = active.selectionStart; selEnd = active.selectionEnd; } } catch (e) {}
+      var vals = comp.renderVals ? comp.renderVals() : {};
+      var frag = tpl.content.cloneNode(true);
+      processChildren(frag, [vals]);
+      host.innerHTML = '';
+      host.appendChild(frag);
+      if (activeId) {
+        var again = document.getElementById(activeId);
+        if (again) { again.focus(); try { if (selStart != null) again.setSelectionRange(selStart, selEnd); } catch (e) {} }
+      }
+    }
+    comp.__render = function () {
+      if (queued) return;
+      queued = true;
+      Promise.resolve().then(function () { queued = false; render(); });
+    };
+    render();
+    if (comp.componentDidMount) comp.componentDidMount();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount); else mount();
+})();
+
+</script>
+</body>
+</html>
