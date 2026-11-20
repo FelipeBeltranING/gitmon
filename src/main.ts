@@ -1,10 +1,10 @@
 import './styles/main.css';
-import { activeSeason, editionLabel } from './config';
-import { buildPack } from './core/pack';
-import { fetchGithub } from './data/github';
-import * as pokeapi from './data/pokeapi';
-import { startApp } from './ui/app';
-import { createTrade } from './ui/trade';
+import { activeSeason, editionLabel } from './config.js';
+import { buildPack } from './core/pack.js';
+import { fetchGithub } from './data/github.js';
+import * as pokeapi from './data/pokeapi.js';
+import { startApp } from './ui/app.js';
+import { createTrade } from './ui/trade.js';
 
 const season = activeSeason();
 

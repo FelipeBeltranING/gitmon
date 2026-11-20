@@ -1,8 +1,8 @@
-import type { Friend, GithubData } from '../core/pack';
-import { fnv1a, mulberry32 } from '../core/rng';
-import type { GhEvent, GhProfile, GhRepo } from '../core/stats';
-import { LANGUAGE_TYPE } from '../core/types';
-import { HttpError, getJson } from './http';
+import type { Friend, GithubData } from '../core/pack.js';
+import { fnv1a, mulberry32 } from '../core/rng.js';
+import type { GhEvent, GhProfile, GhRepo } from '../core/stats.js';
+import { LANGUAGE_TYPE } from '../core/types.js';
+import { HttpError, getJson } from './http.js';
 
 export class TrainerNotFound extends Error {
   constructor(readonly login: string) {

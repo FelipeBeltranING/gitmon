@@ -1,7 +1,7 @@
-import type { Candidate } from '../core/choose';
-import type { Attack, MonInfo } from '../core/pack';
-import type { TypeName } from '../core/types';
-import { getJson } from './http';
+import type { Candidate } from '../core/choose.js';
+import type { Attack, MonInfo } from '../core/pack.js';
+import type { TypeName } from '../core/types.js';
+import { getJson } from './http.js';
 
 const API = 'https://pokeapi.co/api/v2';
 /** Solo especies del Pokédex nacional (las formas alternativas tienen ids de 10001 en adelante). */
