@@ -1,0 +1,20 @@
+name: 🐛 Algo falla
+description: Un sobre que no abre, una carta rota, un error.
+labels: ['tipo: bug']
+body:
+  - type: input
+    id: usuario
+    attributes:
+      label: Usuario de GitHub que probaste
+      placeholder: octocat
+  - type: textarea
+    id: que-paso
+    attributes:
+      label: ¿Qué pasó?
+      description: Qué esperabas y qué viste. Una captura ayuda mucho.
+    validations:
+      required: true
+  - type: input
+    id: navegador
+    attributes:
+      label: Navegador y dispositivo
