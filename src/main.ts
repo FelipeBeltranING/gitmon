@@ -4,6 +4,7 @@ import { buildPack } from './core/pack';
 import { fetchGithub } from './data/github';
 import * as pokeapi from './data/pokeapi';
 import { startApp } from './ui/app';
+import { createTrade } from './ui/trade';
 
 const season = activeSeason();
 
@@ -22,8 +23,11 @@ const build = (login: string, onStep?: (text: string) => void) =>
     onStep,
   );
 
+const trade = createTrade({ build: (login) => build(login) });
+
 startApp({
   season,
   defaultLogin: 'FelipeBeltranING',
   build,
+  onDone: (pack) => trade.show(pack),
 });
