@@ -3,7 +3,7 @@
  * el tipo sigue saliendo de tus lenguajes, pero cambia qué Pokémon de ese tipo te toca.
  * Ver docs/adr/0002-temporadas.md.
  */
-export const SEASON = '1';
+export const SEASON = '5';
 
 /** Amigos visibles antes del botón «+N más» (se piden como máximo 24). */
 export const FRIENDS_VISIBLE = 8;
