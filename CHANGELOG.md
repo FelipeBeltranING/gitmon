@@ -2,6 +2,22 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/); versiones con [SemVer](https://semver.org/lang/es/).
 
+## [0.2.0] · 2026-11-20 · Sobre jugable
+
+### Añadido
+- Sobre de 6 cartas: compañero en holo + un Pokémon por cada uno de tus 5 repos más activos.
+- Carta coleccionable con brillo holográfico, rarezas (común → variocolor), etapa evolutiva real y movimiento real en español.
+- Apertura animada: rasgar el sobre, voltear una a una o todas, grito del Pokémon en las cartas raras.
+- Colección con resumen: rarezas, tipos cubiertos y poder del sobre.
+- Intercambio: amigos de GitHub con un clic (8 visibles, «+N más» hasta 24), duelo de poder y propuesta de cambio.
+- Temporadas con semilla global; se lanza con la temporada 5.
+- Función `/api/github` con token opcional y caché de 24 h; respaldo directo a la API pública y perfil simulado si GitHub limita.
+- Enlaces compartibles `/u/<usuario>`.
+- Pruebas del núcleo con Vitest y CI en GitHub Actions.
+
+### Cambiado
+- La hora pico cuenta días distintos y «búho nocturno» exige 3 noches distintas (ADR 0003).
+
 ## [0.1.0] · 2026-11-19 · Concepto
 
 ### Añadido
@@ -9,4 +25,5 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/); v
 - Bocetos v0 (hierba alta nocturna) y v1 (Pokédex, Combate, Carta holo, híbrido y sobre).
 - ADR 0001: dirección visual de carta coleccionable.
 
+[0.2.0]: https://github.com/FelipeBeltranING/gitmon/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/FelipeBeltranING/gitmon/releases/tag/v0.1.0
