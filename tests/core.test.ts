@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { buildPool, cosine, pickBest, sample, scoreCandidate, targetBaseTotal } from '../src/core/choose';
 import { companionRarity, packPower, repoRarity } from '../src/core/rarity';
 import { fnv1a, isShinySeed, mulberry32, seedOf } from '../src/core/rng';
-import { mostActive, profileSignals, repoVector, stat, type GhRepo } from '../src/core/stats';
+import { mostActive, profileSignals, repoVector, rhythm, stat, type GhRepo } from '../src/core/stats';
 import { typeColor, typeName, typeOfLanguage } from '../src/core/types';
 
 const NOW = Date.parse('2026-11-20T12:00:00Z');
@@ -61,8 +61,8 @@ describe('stats', () => {
   it('lenguaje principal → tipo principal; madrugada → Siniestro', () => {
     const profile = { login: 'x', avatar_url: '', created_at: '2020-01-01T00:00:00Z', followers: 10 };
     const repos = [repo({ language: 'Java', size: 9000 }), repo({ language: 'Python' })];
-    const nightEvent = { type: 'PushEvent', created_at: new Date(2026, 10, 1, 2, 30).toISOString(), payload: { size: 3 } };
-    const s = profileSignals(profile, repos, [nightEvent], NOW, mulberry32(1));
+    const nights = [1, 2, 3].map((d) => ({ type: 'PushEvent', created_at: new Date(2026, 10, d, 2, 30).toISOString(), payload: { size: 3 } }));
+    const s = profileSignals(profile, repos, nights, NOW, mulberry32(1));
     expect(s.languages[0]).toBe('Java');
     expect(s.primary).toBe('fire');
     expect(s.secondary).toBe('dark');
@@ -70,6 +70,22 @@ describe('stats', () => {
     expect(s.total).toBe(s.vector.reduce((a, b) => a + b, 0));
   });
 
+  it('una sola ráfaga a medianoche no te vuelve búho nocturno', () => {
+    const profile = { login: 'x', avatar_url: '', created_at: '2020-01-01T00:00:00Z', followers: 10 };
+    const repos = [repo({ language: 'Java', size: 9000 }), repo({ language: 'Python' })];
+    const burst = Array.from({ length: 96 }, (_, i) => ({ type: 'PushEvent', created_at: new Date(2026, 10, 20, 0, i % 60).toISOString() }));
+    const day = { type: 'PushEvent', created_at: new Date(2026, 10, 18, 20, 0).toISOString() };
+    const s = profileSignals(profile, repos, [...burst, day], NOW, mulberry32(1));
+    expect(s.night).toBe(false);
+    expect(s.secondary).toBe('poison');
+  });
+
+  it('rhythm cuenta días distintos por hora', () => {
+    const ev = (d: number, h: number) => ({ type: 'PushEvent', created_at: new Date(2026, 10, d, h).toISOString() });
+    const r = rhythm([ev(1, 15), ev(2, 15), ev(3, 0), ev(3, 0), ev(3, 0)], mulberry32(1));
+    expect(r.peakHour).toBe(15);
+    expect(r.nightDays).toBe(1);
+  });
 
   it('ignora forks si hay repos propios', () => {
     const profile = { login: 'x', avatar_url: '', created_at: '2020-01-01T00:00:00Z', followers: 0 };
