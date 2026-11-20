@@ -7,7 +7,7 @@
 Escribe tu usuario de GitHub y abre un sobre de 6 cartas Pokémon:
 tu **compañero**, calculado con todo tu perfil, y un Pokémon por cada uno de tus **5 repos más activos**.
 
-![Temporada 5](https://img.shields.io/badge/temporada-5-7B4FC9?style=flat-square)
+![Primera edición](https://img.shields.io/badge/edici%C3%B3n-primera-7B4FC9?style=flat-square)
 [![CI](https://github.com/FelipeBeltranING/gitmon/actions/workflows/ci.yml/badge.svg)](https://github.com/FelipeBeltranING/gitmon/actions/workflows/ci.yml)
 ![PokeAPI](https://img.shields.io/badge/datos-PokeAPI-EF5350?style=flat-square)
 ![Licencia MIT](https://img.shields.io/badge/licencia-MIT-FFCB05?style=flat-square)
@@ -25,7 +25,7 @@ tu **compañero**, calculado con todo tu perfil, y un Pokémon por cada uno de t
 
 | Sobre | Colección |
 |---|---|
-| <img src="docs/capturas/1-sobre.jpg" alt="Sobre cerrado de la temporada 5" width="420"> | <img src="docs/capturas/3-coleccion.jpg" alt="Colección de 6 cartas" width="420"> |
+| <img src="docs/capturas/1-sobre.jpg" alt="Sobre cerrado de la primera edición" width="420"> | <img src="docs/capturas/3-coleccion.jpg" alt="Colección de 6 cartas" width="420"> |
 
 ## Cómo se elige cada carta
 
@@ -33,7 +33,7 @@ tu **compañero**, calculado con todo tu perfil, y un Pokémon por cada uno de t
 - **Stats**: seis señales de tu perfil (repos × años, commits, forks, estrellas, seguidores y días activos) en escala logarítmica de 10 a 160.
 - **Pokémon**: de la PokeAPI salen los Pokémon de tu tipo; gana el que más se parece en *forma* a tus stats (similitud coseno) sin pasarse de tu etapa.
 - **Ataques**: tus repos con más estrellas (daño = 30 + 6·√estrellas) y un movimiento real del Pokémon, en español.
-- **Temporada**: una semilla global decide qué Pokémon de tu tipo te toca. Mismo usuario + misma temporada = mismo sobre, siempre.
+- **Edición**: una semilla global decide qué Pokémon de tu tipo te toca. Mismo usuario + misma edición = mismo sobre, siempre.
 
 El detalle completo, con fórmulas, está en [docs/algoritmo.md](docs/algoritmo.md).
 
@@ -46,7 +46,7 @@ npm test           # pruebas del núcleo con Vitest
 npm run build      # tipos + build de producción en dist/
 ```
 
-Previsualiza otra temporada con `?t=4` y abre directamente un sobre con `/u/<usuario>`.
+Prueba otra semilla con `?t=4` y abre directamente un sobre con `/u/<usuario>`.
 
 ### Variables de entorno
 
@@ -75,7 +75,7 @@ docs/                concepto, bocetos, decisiones (ADR) y capturas
 
 - [Concepto v0](docs/concepto-v0.md) y sus [bocetos originales](docs/bocetos/v0/).
 - [Bocetos v1](docs/bocetos/v1/): tres direcciones pokemaníacas (Pokédex, Combate, Carta holo), un híbrido y el sobre final.
-- Decisiones: [0001 · Carta coleccionable](docs/adr/0001-direccion-carta.md) · [0002 · Temporadas](docs/adr/0002-temporadas.md) · [0003 · Ritmo por días](docs/adr/0003-ritmo-por-dias.md).
+- Decisiones: [0001 · Carta coleccionable](docs/adr/0001-direccion-carta.md) · [0002 · Ediciones con semilla global](docs/adr/0002-temporadas.md) · [0003 · Ritmo por días](docs/adr/0003-ritmo-por-dias.md).
 
 ## Créditos
 
