@@ -2,6 +2,18 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/); versiones con [SemVer](https://semver.org/lang/es/).
 
+## [0.3.0] · 2026-11-20 · Compartir
+
+### Añadido
+- `/api/card?user=<login>`: tu compañero como carta SVG para el README, con arte incrustado, brillo holo animado y caché de 24 h (#15).
+- Botón «Tarjeta para tu README» que copia el Markdown.
+- `/api/og?user=<login>`: imagen para redes en PNG 1200×630 con tu compañero y su carta (#16).
+- `/u/<login>` sirve título e imagen de ese entrenador para las vistas previas de WhatsApp, X o Discord.
+
+### Cambiado
+- Imports con extensión `.js` para que las funciones de Vercel usen el mismo núcleo que la app.
+- `buildCompanion` calcula solo el compañero, con muchas menos peticiones.
+
 ## [0.2.1] · 2026-11-20 · Pulido del lanzamiento
 
 ### Cambiado
@@ -37,6 +49,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/); v
 - Bocetos v0 (hierba alta nocturna) y v1 (Pokédex, Combate, Carta holo, híbrido y sobre).
 - ADR 0001: dirección visual de carta coleccionable.
 
+[0.3.0]: https://github.com/FelipeBeltranING/gitmon/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/FelipeBeltranING/gitmon/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/FelipeBeltranING/gitmon/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/FelipeBeltranING/gitmon/releases/tag/v0.1.0
