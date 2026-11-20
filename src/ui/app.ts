@@ -1,8 +1,8 @@
-import type { Pack } from '../core/pack';
-import { RARITY, type Rarity } from '../core/rarity';
-import { TYPES, typeColor } from '../core/types';
-import { bindTilt, captionHTML, cardHTML, playCry } from './card';
-import { $, $$, esc, fmt, prefersReducedMotion, wait } from './dom';
+import type { Pack } from '../core/pack.js';
+import { RARITY, type Rarity } from '../core/rarity.js';
+import { TYPES, typeColor } from '../core/types.js';
+import { bindTilt, captionHTML, cardHTML, playCry } from './card.js';
+import { $, $$, esc, fmt, prefersReducedMotion, wait } from './dom.js';
 
 type State = 'idle' | 'loading' | 'ready' | 'opening' | 'reveal' | 'done';
 
@@ -69,12 +69,16 @@ export function startApp(opts: AppOptions): void {
     panel.innerHTML = `<span class="k">Sobre de @${esc(p.login)}</span><h1>Tu compañero es <span>${esc(p.companion.name)}</span>.</h1>
       <p class="lead">${esc(p.companion.why)}. Mueve el cursor sobre la carta para ver el brillo.</p>
       <div class="tally">${tally}<div><small>Tipos</small>${types.size}/18</div><div><small>Poder del sobre</small>${fmt(p.power)}</div></div>
-      <div class="acts"><button class="btn" id="tr">⇄ Intercambiar con un amigo</button><button class="btn w" id="share">Copiar enlace</button><button class="btn w" id="other">Otro entrenador</button></div>`;
+      <div class="acts"><button class="btn" id="tr">⇄ Intercambiar con un amigo</button><button class="btn w" id="md">Tarjeta para tu README</button><button class="btn w" id="share">Copiar enlace</button><button class="btn w" id="other">Otro entrenador</button></div>`;
     $('#tr').addEventListener('click', () => {
       const trade = $('#intercambio');
       trade.hidden = false;
       trade.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
       opts.onDone?.(p);
+    });
+    $('#md').addEventListener('click', (e) => {
+      void navigator.clipboard?.writeText(readmeMarkdown(location.origin, p.login));
+      (e.currentTarget as HTMLElement).textContent = '¡Markdown copiado!';
     });
     $('#share').addEventListener('click', (e) => {
       const url = `${location.origin}/u/${encodeURIComponent(p.login)}`;
@@ -253,6 +257,12 @@ export function startApp(opts: AppOptions): void {
   panelIdle(initial || opts.defaultLogin);
   stage.innerHTML = packHTML(initial || '???', opts.edition);
   if (initial) void load(initial);
+}
+
+/** Markdown para pegar en el README: la carta enlaza al sobre. */
+export function readmeMarkdown(origin: string, login: string): string {
+  const user = encodeURIComponent(login);
+  return `[![Mi Gitmon](${origin}/api/card?user=${user})](${origin}/u/${user})`;
 }
 
 function packHTML(login: string, edition: string): string {
