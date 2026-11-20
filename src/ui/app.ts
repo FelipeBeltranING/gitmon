@@ -8,6 +8,8 @@ type State = 'idle' | 'loading' | 'ready' | 'opening' | 'reveal' | 'done';
 
 export interface AppOptions {
   season: string;
+  /** Nombre visible de la edición, p. ej. «Primera edición». */
+  edition: string;
   defaultLogin: string;
   build(login: string, onStep: (text: string) => void): Promise<Pack>;
   onDone?(pack: Pack): void;
@@ -29,12 +31,12 @@ export function startApp(opts: AppOptions): void {
   let flipped = false;
   let auto: number | null = null;
 
-  $('#season-tag').textContent = `Temporada ${opts.season}`;
+  $('#season-tag').textContent = opts.edition;
   setZigzag();
 
   // ---------- panel izquierdo ----------
   function panelIdle(login = opts.defaultLogin): void {
-    panel.innerHTML = `<span class="k">Temporada ${esc(opts.season)} · Edición Open Source</span>
+    panel.innerHTML = `<span class="k">${esc(opts.edition)} · Open Source</span>
       <h1>Tu código viene en <span>sobre</span>.</h1>
       <p class="lead">Escribe tu usuario de GitHub y abre tu sobre de 6 cartas: tu compañero, calculado con todo tu perfil, y un Pokémon por cada uno de tus 5 repos más activos.</p>
       <form class="form" id="scan"><span>github.com/</span><input id="user" value="${esc(login)}" spellcheck="false" autocomplete="off" aria-label="Usuario de GitHub" required><button id="go">Abrir mi sobre</button></form>
@@ -81,7 +83,7 @@ export function startApp(opts: AppOptions): void {
     });
     $('#other').addEventListener('click', () => {
       state = 'idle';
-      stage.innerHTML = packHTML('???', opts.season);
+      stage.innerHTML = packHTML('???', opts.edition);
       stage.classList.remove('glow');
       panelIdle('');
       $<HTMLInputElement>('#user').focus();
@@ -95,7 +97,7 @@ export function startApp(opts: AppOptions): void {
     state = 'loading';
     stopAuto();
     stage.classList.remove('glow');
-    stage.innerHTML = packHTML(login, opts.season);
+    stage.innerHTML = packHTML(login, opts.edition);
     $('#pack').classList.add('loading');
     $<HTMLButtonElement>('#go').disabled = true;
     hero.style.setProperty('--tc', '#7B4FC9');
@@ -111,7 +113,7 @@ export function startApp(opts: AppOptions): void {
     } catch (e) {
       state = 'idle';
       panelIdle(login);
-      stage.innerHTML = packHTML(login, opts.season);
+      stage.innerHTML = packHTML(login, opts.edition);
       step(`😵 ${(e as Error).message}`);
       return;
     }
@@ -249,16 +251,16 @@ export function startApp(opts: AppOptions): void {
   const fromQuery = new URLSearchParams(location.search).get('u') ?? '';
   const initial = fromPath || fromQuery;
   panelIdle(initial || opts.defaultLogin);
-  stage.innerHTML = packHTML(initial || '???', opts.season);
+  stage.innerHTML = packHTML(initial || '???', opts.edition);
   if (initial) void load(initial);
 }
 
-function packHTML(login: string, season: string): string {
+function packHTML(login: string, edition: string): string {
   const dots = Object.values(TYPES)
     .map((t) => `<i style="--c:${t.color}"></i>`)
     .join('');
   return `<div class="rays"></div><div class="pack" id="pack"><div class="ptop"></div><div class="pmain">
-    <div class="plogo">GITMON</div><div class="psub">TEMPORADA ${esc(season)} · EDICIÓN OPEN SOURCE</div>
+    <div class="plogo">GITMON</div><div class="psub">${esc(edition.toUpperCase())} · OPEN SOURCE</div>
     <div class="pball"><i class="pb"></i></div><div class="ptypes">${dots}</div>
     <div class="pfoot"><span>6 CARTAS</span><span class="pu">@${esc(login)}</span></div><div class="pcrimp"></div></div></div>
     <div class="stage-step" id="stp" role="status"></div>`;

@@ -44,7 +44,7 @@ semilla(clave) = FNV-1a(clave)                 en la temporada 1
 semilla(clave) = FNV-1a("T<temporada>:" + clave) en las demás
 ```
 
-La clave del compañero es el usuario; la de cada repo, `usuario/repo`. Variocolor si `semilla mod 4096 = 0`.
+La semilla activa es `5` y se presenta como **Primera edición**. La clave del compañero es el usuario; la de cada repo, `usuario/repo`. Variocolor si `semilla mod 4096 = 0`.
 
 ## 4. Cartas (`pack.ts`, `rarity.ts`)
 
