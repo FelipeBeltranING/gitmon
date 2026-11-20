@@ -1,0 +1,26 @@
+/* ---------- intercambio ---------- */
+.trade{background:#1D1D2B;color:#fff;padding:46px clamp(16px,4vw,40px) 60px}
+.trade .coll-h h2{-webkit-text-stroke:3px #000}
+.trade .coll-h p{color:#CFC8BA}
+.tform{max-width:1120px;margin:0 auto 24px}
+.vs{max-width:1120px;margin:0 auto 26px;display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center}
+.vs .side{background:#fff;color:var(--ink);border:4px solid #000;border-radius:18px;padding:14px 18px;display:flex;align-items:center;gap:14px}
+.vs .side img{width:54px;height:54px;border-radius:50%;border:3px solid var(--ink)}
+.vs .side b{font:400 24px 'Lilita One';display:block}
+.vs .side small{font-weight:800;font-size:13px;opacity:.7}
+.vs .side.win{outline:5px solid var(--yellow);box-shadow:0 0 30px rgba(255,203,5,.6)}
+.vs .mid{font:400 40px 'Lilita One';color:var(--yellow);-webkit-text-stroke:2px #000;paint-order:stroke fill}
+.deal{max-width:1120px;margin:0 auto 26px;background:#FFFBEA;color:var(--ink);border:4px solid #000;border-radius:14px;padding:14px 18px;font:600 20px 'Pixelify Sans'}
+.trade .binder .slot{outline-color:rgba(255,255,255,.2)}
+.trade .cap{color:#fff}
+.friends{max-width:1120px;margin:0 auto 18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-weight:900}
+.friends button{display:flex;align-items:center;gap:8px;background:#fff;color:var(--ink);border:3px solid #000;border-radius:99px;padding:4px 14px 4px 4px;font-weight:900;font-size:14px;box-shadow:0 4px 0 #000}
+.friends button:hover{background:var(--yellow)}
+.friends .more-f{padding:4px 14px;background:#2B2B38;color:#fff;border-color:#fff}
+.friends img{width:30px;height:30px;border-radius:50%;border:2px solid var(--ink)}
+.note{font-size:12px;font-weight:800;text-align:center;padding:16px;opacity:.7}
+.foot{background:#000;color:#CFC8BA;font-weight:700;font-size:13px;text-align:center;padding:24px 16px}
+@media(max-width:940px){.hwrap{grid-template-columns:1fr;gap:10px}.copy{text-align:center}.copy .form,.copy .lead{margin-left:auto;margin-right:auto}.progress,.acts,.tally{justify-content:center}.binder{grid-template-columns:repeat(2,minmax(0,260px))}.vs{grid-template-columns:1fr}.vs .mid{text-align:center}.bar nav{display:none}}
+@media(max-width:520px){.binder{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 10px}}
+.foot a{color:#fff}
+.note{background:#1D1D2B;color:#fff;margin:0;opacity:1}
