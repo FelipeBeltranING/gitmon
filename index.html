@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gitmon · Tu código viene en sobre</title>
+    <meta name="description" content="Escribe tu usuario de GitHub y abre un sobre de 6 cartas Pokémon: tu compañero y un Pokémon por cada uno de tus repos más activos." />
+    <meta name="theme-color" content="#E3350D" />
+    <meta property="og:title" content="Gitmon · Tu código viene en sobre" />
+    <meta property="og:description" content="Abre tu sobre de cartas Pokémon generado con tu perfil de GitHub." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;700;800;900&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip" href="#top">Saltar al sobre</a>
+    <header class="bar">
+      <a class="brand" href="/"><i class="pb" aria-hidden="true"></i>Gitmon <small id="season-tag">Temporada</small></a>
+      <nav aria-label="Secciones">
+        <a href="#top">Abrir sobre</a>
+        <a href="#coleccion">Mi colección</a>
+        <a href="#intercambio">Intercambio</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="hwrap">
+          <div class="copy" id="panel" aria-live="polite"></div>
+          <div><div class="stage" id="stage" tabindex="0" role="button" aria-label="Sobre de cartas"></div></div>
+        </div>
+      </section>
+
+      <section class="coll" id="coleccion" hidden>
+        <div class="coll-h">
+          <div>
+            <h2>Tu colección</h2>
+            <p>Tu compañero sale de todo tu perfil. Las otras cartas, de tus repos más activos.</p>
+          </div>
+          <span class="count" id="count">0/6</span>
+        </div>
+        <div class="binder" id="binder"></div>
+      </section>
+
+      <section class="trade" id="intercambio" hidden>
+        <div class="coll-h">
+          <div>
+            <h2>Intercambio</h2>
+            <p>Abre el sobre de un amigo y mira qué carta le cambiarías.</p>
+          </div>
+        </div>
+        <div class="friends" id="friends"></div>
+        <form class="form tform" id="tform">
+          <span>github.com/</span>
+          <input id="friend" placeholder="usuario de tu amigo" spellcheck="false" autocomplete="off" aria-label="Usuario de tu amigo" />
+          <button>Abrir su sobre</button>
+        </form>
+        <div id="tres"></div>
+      </section>
+    </main>
+
+    <p class="note" id="srcnote"></p>
+    <footer class="foot">
+      Gitmon es un proyecto fan sin ánimo de lucro. Pokémon y los nombres asociados son marcas de Nintendo, Creatures Inc. y GAME FREAK.
+      Datos de <a href="https://pokeapi.co">PokeAPI</a> y de la API pública de GitHub.
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
