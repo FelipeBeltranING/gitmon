@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { buildPool, cosine, pickBest, sample, scoreCandidate, targetBaseTotal } from '../src/core/choose';
 import { companionRarity, packPower, repoRarity } from '../src/core/rarity';
 import { fnv1a, isShinySeed, mulberry32, seedOf } from '../src/core/rng';
 import { mostActive, profileSignals, repoVector, stat, type GhRepo } from '../src/core/stats';
@@ -100,6 +101,41 @@ describe('tipos', () => {
   });
 });
 
+describe('elección', () => {
+  it('coseno de vectores iguales es 1', () => {
+    expect(cosine([1, 2, 3], [2, 4, 6])).toBeCloseTo(1);
+  });
+
+  it('el objetivo va de 200 a 720', () => {
+    expect(targetBaseTotal(60)).toBe(200);
+    expect(targetBaseTotal(960)).toBe(720);
+  });
+
+  it('prefiere el candidato de tamaño parecido y con el segundo tipo', () => {
+    const vector = [30, 30, 30, 30, 30, 30] as [number, number, number, number, number, number];
+    const small = { id: 1, types: ['fire'], base: [50, 50, 50, 50, 50, 50] };
+    const huge = { id: 2, types: ['fire'], base: [120, 120, 120, 120, 120, 120] };
+    expect(pickBest([small, huge], vector, 180, null)?.id).toBe(1);
+    const dual = { id: 3, types: ['fire', 'poison'], base: [52, 52, 52, 52, 52, 52] };
+    expect(scoreCandidate(dual, vector, 180, 'poison')).toBeGreaterThan(scoreCandidate(small, vector, 180, 'poison'));
+  });
+
+  it('la bolsa no repite Pokémon ya usados y pesa doble tipo', () => {
+    const pool = buildPool([1, 2, 3, 4], [3, 4, 9], new Set([1]));
+    expect(pool).not.toContain(1);
+    expect(pool.filter((id) => id === 3)).toHaveLength(3);
+  });
+
+  it('si todo está usado, vuelve a la bolsa completa', () => {
+    expect(buildPool([1, 2], null, new Set([1, 2]))).toEqual([1, 2]);
+  });
+
+  it('sample devuelve ids distintos y deterministas', () => {
+    const a = sample([1, 2, 3, 4, 5, 6], 4, mulberry32(7));
+    expect(new Set(a).size).toBe(4);
+    expect(a).toEqual(sample([1, 2, 3, 4, 5, 6], 4, mulberry32(7)));
+  });
+});
 
 describe('rareza', () => {
   it('umbrales de las cartas de repo', () => {
